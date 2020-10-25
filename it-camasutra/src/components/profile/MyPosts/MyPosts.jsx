@@ -2,15 +2,17 @@ import React from 'react'
 import styles from './MyPosts.module.css'
 import Post from './Post/Post'
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+
+    
+
     return(
         <div className="wrapper">
             <ul className={styles.list}>
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
+
+                <Post message="Hi! How are you?" />
+                <Post message="It is my first post" />
+              
             </ul>
         </div>
     )
