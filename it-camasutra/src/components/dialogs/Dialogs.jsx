@@ -2,6 +2,22 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './Dialogs.css'
 
+const UserItem = (props) => {
+
+  let path = '/dialogs/' + props.id
+  return(
+    <li className="users__item">
+      <NavLink className='item' activeClassName='active-user' to={path}>{props.name}</NavLink>
+    </li>
+  )
+}
+
+const MessageItem = (props) => {
+  return(
+    <li className="messades__item">{props.message}</li>
+  )
+}
+
 
 const Dialogs = () => {
     return (
@@ -9,31 +25,19 @@ const Dialogs = () => {
         <div className="contentWrapper">
           <div className="users">
             <ul className="users__list">
-              <li className="users__item">
-                <NavLink className='item' activeClassName='active-user' to='/dialogs/1'>Дмитрий</NavLink>
-              </li>
-              <li className="users__item">
-                <NavLink className='item' activeClassName='active-user' to='/dialogs/2'>Ольга</NavLink>
-              </li>
-              <li className="users__item">
-                <NavLink className='item' activeClassName='active-user' to='/dialogs/3'>Максим</NavLink>
-              </li>
-              <li className="users__item">
-                <NavLink className='item' activeClassName='active-user' to='/dialogs/4'>Мария</NavLink>
-              </li>
-              <li className="users__item">
-                <NavLink className='item' activeClassName='active-user' to='/dialogs/5'>Александр</NavLink>
-              </li>
-              <li className="users__item">
-                <NavLink className='item' activeClassName='active-user' to='/dialogs/6'>Светлана</NavLink>
-              </li>
-            </ul>
+              <UserItem name='Дмитрий' id='1' />
+              <UserItem name='Ольга' id='2' />
+              <UserItem name='Максим' id='3' />
+              <UserItem name='Мария' id='4' />
+              <UserItem name='Александр' id='5' />
+              <UserItem name='Светлана' id='6' />
+             </ul>
           </div>
           <div className="messages">
             <ul className="messages__list">
-              <li className="messades__item">Hi!</li>
-              <li className="messades__item">How are you?</li>
-              <li className="messades__item">By!</li>
+              <MessageItem message='Hi!' />
+              <MessageItem message='How are you?' />
+              <MessageItem message='By!' />
             </ul>
           </div>
         </div>
