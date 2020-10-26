@@ -1,3 +1,9 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  background: rgb(201, 201, 201);
+}
 .app-wrapper{
   display: grid;
   grid-template-rows: 60px 1fr;
@@ -19,8 +25,8 @@
 
 
 
-.content{
+.wrapper-content{
+  background: #fff;
   grid-area: content;
-  background-color: aqua;
 }
 
