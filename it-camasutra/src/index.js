@@ -4,9 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+const dialogData = [
+  { id: 1, name: 'Дмитрий' },
+  { id: 2, name: 'Ольга' },
+  { id: 3, name: 'Максим' },
+  { id: 4, name: 'Мария' },
+  { id: 5, name: 'Александр' },
+]
+
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App dialogData={dialogData} />
   </React.StrictMode>,
   document.getElementById('root')
 );

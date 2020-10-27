@@ -14,19 +14,22 @@ import Music from './components/music/Music';
 
 
 
-function App() {
+function App(props) {
+
+
+
+
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
         <NavBar />
         <div className="wrapper-content">
-          <Route path='/profile' component={Profile}/>
-          <Route path='/dialogs' component={Dialogs}/>
-          <Route path='/news' component={News}/>
-          <Route path='/music' component={Music}/>
-          <Route path='/settings' component={Settings}/>
-          
+          <Route path='/profile' render={() => <Profile />} />
+          <Route path='/dialogs' render={() => <Dialogs dialogData={props.dialogData} />} />
+          <Route path='/news' render={() => <News />} />
+          <Route path='/music' render={() => <Music />} />
+          <Route path='/settings' render={() => <Settings />} />
         </div>
       </div>
     </BrowserRouter>

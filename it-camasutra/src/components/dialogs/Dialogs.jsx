@@ -1,50 +1,37 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import UserItem from './UserItem/UserItem'
+import MessageItem from './MessageItem/MessageItem'
 import './Dialogs.css'
 
-const UserItem = (props) => {
+const Dialogs = (props) => {
 
-  let path = '/dialogs/' + props.id
-  return(
-    <li className="users__item">
-      <NavLink className='item' activeClassName='active-user' to={path}>{props.name}</NavLink>
-    </li>
-  )
-}
+  const dialogsData = props.dialogData
 
-const MessageItem = (props) => {
-  return(
-    <li className="messades__item">{props.message}</li>
-  )
-}
+  const messagesData = [
+    { id: 1, message: 'Hi!' },
+    { id: 2, message: 'How are you?' },
+    { id: 3, message: 'i want to sleep' },
+    { id: 4, message: 'By!' },
+  ]
 
+  const dialogs = dialogsData.map(item => <UserItem name={item.name} id={item.id} />)
+  const messages = messagesData.map(item => <MessageItem message={item.message} />)
 
-const Dialogs = () => {
-    return (
-      <div className="content">
-        <div className="contentWrapper">
-          <div className="users">
-            <ul className="users__list">
-              <UserItem name='Дмитрий' id='1' />
-              <UserItem name='Ольга' id='2' />
-              <UserItem name='Максим' id='3' />
-              <UserItem name='Мария' id='4' />
-              <UserItem name='Александр' id='5' />
-              <UserItem name='Светлана' id='6' />
-             </ul>
-          </div>
-          <div className="messages">
-            <ul className="messages__list">
-              <MessageItem message='Hi!' />
-              <MessageItem message='How are you?' />
-              <MessageItem message='By!' />
-            </ul>
-          </div>
+  return (
+    <div className="content">
+      <div className="contentWrapper">
+        <div className="users">
+          <ul className="users__list">
+            {dialogs}
+          </ul>
         </div>
-
-
+        <div className="messages">
+          <ul className="messages__list">
+            {messages}
+          </ul>
+        </div>
       </div>
-
+    </div>
   )
 }
 
