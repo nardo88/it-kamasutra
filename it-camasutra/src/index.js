@@ -3,21 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-
-const dialogData = [
-  { id: 1, name: 'Дмитрий' },
-  { id: 2, name: 'Ольга' },
-  { id: 3, name: 'Максим' },
-  { id: 4, name: 'Мария' },
-  { id: 5, name: 'Александр' },
-]
+import state from './redux/state'
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App dialogData={dialogData} />
+    <App state={state}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

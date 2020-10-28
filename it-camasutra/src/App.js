@@ -16,7 +16,7 @@ import Music from './components/music/Music';
 
 function App(props) {
 
-
+  
 
 
   return (
@@ -25,8 +25,8 @@ function App(props) {
         <Header />
         <NavBar />
         <div className="wrapper-content">
-          <Route path='/profile' render={() => <Profile />} />
-          <Route path='/dialogs' render={() => <Dialogs dialogData={props.dialogData} />} />
+          <Route path='/profile' render={() => <Profile state={props.state.profilePage}  />} />
+          <Route path='/dialogs' render={() => <Dialogs state={props.state.messagesPage} />} />
           <Route path='/news' render={() => <News />} />
           <Route path='/music' render={() => <Music />} />
           <Route path='/settings' render={() => <Settings />} />
