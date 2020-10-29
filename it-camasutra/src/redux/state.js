@@ -1,7 +1,8 @@
+import { renderDom } from '../render.js'
+
 
 let state = {
     profilePage: {
-
         postsData: [
             {id: 1, message: 'Hi, how are you?', likesCount: 12},
             {id: 2, message: 'it is my first post', likesCount: 11},
@@ -25,8 +26,17 @@ let state = {
             { id: 4, message: 'By!' },
         ],
     }
+}
 
-    
+export const addPost = (message) => {
+    let post = {
+        id: 5,
+        message: message,
+        likesCount: 0
+    }
+
+    state.profilePage.postsData.push(post)
+    renderDom(state)
 }
 
 export default state

@@ -13,6 +13,7 @@ const Dialogs = (props) => {
   let messageText = React.createRef()
 
   const sendMessage = () => {
+    
     console.log(messageText.current.value);
   }
 
@@ -30,8 +31,11 @@ const Dialogs = (props) => {
             {messages}
           </ul>
           <div className="newMesage">
+
             <textarea ref={messageText} className="messageText" placeholder="Введите новое сообщение"></textarea>
+
             <button className="sendMesage" onClick={sendMessage}>Отправить</button>
+            
           </div>
         </div>
       </div>
