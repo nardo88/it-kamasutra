@@ -13,10 +13,15 @@ const MyPosts = (props) => {
         props.addPost(postText.current.value)
     }
 
+    let onPostChange = () => {
+        props.addPostText(postText.current.value)
+        console.log(props.newPostText);
+    }
+
 
     return(
         <div className={styles.wrapper}>
-            <textarea ref={postText} className={styles.postText} placeholder="Введите новое сообщение"></textarea>
+            <textarea ref={postText} className={styles.postText} placeholder="Введите новое сообщение" value={props.newPostText} onChange={onPostChange}></textarea>
             <button onClick={addPost} className={styles.addPostText}>Добавить</button>
             <ul className={styles.list}>
                 {posts.reverse()}

@@ -9,6 +9,7 @@ let state = {
             {id: 3, message: "I'm back", likesCount: 8},
             {id: 3, message: "I'm back", likesCount: 8},
         ],
+        newPostText: "default"
     },
     messagesPage: {
         dialogData: [
@@ -36,6 +37,12 @@ export const addPost = (message) => {
     }
 
     state.profilePage.postsData.push(post)
+    renderDom(state)
+}
+
+export const addPostText = (text) => {
+
+    state.profilePage.newPostText = text
     renderDom(state)
 }
 
