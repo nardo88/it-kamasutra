@@ -19,7 +19,7 @@ const MyPosts = (props) => {
             <textarea ref={postText} className={styles.postText} placeholder="Введите новое сообщение"></textarea>
             <button onClick={addPost} className={styles.addPostText}>Добавить</button>
             <ul className={styles.list}>
-                {posts}
+                {posts.reverse()}
             </ul>
         </div>
     )
