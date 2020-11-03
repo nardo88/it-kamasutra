@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './MyPosts.module.css'
 import Post from './Post/Post'
-import { addPostActionCreater, postChangeActionCreator } from '../../../redux/state'
+import { addPostActionCreater, postChangeActionCreator } from '../../../redux/reducer-profilePage'
 
 const MyPosts = (props) => {
     const postsData = props.postsData
@@ -12,11 +12,11 @@ const MyPosts = (props) => {
 
     // Функция которая будет вызвана по нажатии кнопки
     const addPost = () => {
-        // создаем объект которые передадим dispatch
-        const action = addPostActionCreater(postText.current.value)
-        // вызываем через props dispatch
-        // и на вход даем наш только что созданный объект
-        props.dispatch(action)
+        if (postText.current.value){
+            const action = addPostActionCreater(postText.current.value)
+            props.dispatch(action)
+        } else alert('введите текст')
+        
     }
 
     const onPostChange = () => {

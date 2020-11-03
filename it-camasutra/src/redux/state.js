@@ -1,7 +1,7 @@
-const ADD_POST = "ADD-POST"
-const ADD_POST_TEXT = "ADD-POST-TEXT"
-const CHANGE_MESSAGE_TEXT = "CHANGE-MESSAGE-TEXT"
-const ADD_MESSAGE = "ADD-MESSAGE"
+import reducerProfilePage from './reducer-profilePage'
+import reduserMessagesPage from './reducer-messagesPage'
+
+
 
 const store = {
     // Сам state
@@ -79,40 +79,16 @@ const store = {
         }
     },
 
-    // метод dispatch в state
-    // метод имеет аргумент action который является объектом
+    
     dispatch(action) {
-        // если свойство type объекта action равно строке  'ADD-POST'
-        if (action.type === ADD_POST) {
-            // то выполняется одна логика
-            // например создаем новый пост
-            let post = {
-                id: 5,
-                message: action.message,
-                likesCount: 0
-            }
-            //  пушим его в state
-            this.state.profilePage.postsData.push(post)
-            // после чего обновляем страницу (ререндер)
-            this.callSubscriber(this.state)
-            // Если type равен другой строке
-        } else if (action.type === ADD_POST_TEXT) {
-            // выполняем другую логику
-            this.state.profilePage.newPostText = action.text
-            this.callSubscriber(this.state)
-
-        } else if (action.type === CHANGE_MESSAGE_TEXT) {
-            this.state.messagesPage.messageText = action.text
-            this.callSubscriber(this.state)
-        } else if (action.type === ADD_MESSAGE){
-            let messageItem = {
-                id: this.state.messagesPage.messagesData.length+1,
-                message: action.message,
-            }
-            this.state.messagesPage.messagesData.push(messageItem)
-            this.state.messagesPage.messageText = ''
-            this.callSubscriber(this.state)
-        }
+        // здесь мы обращаемся к определнному участку (ветки state) и помещаем в него
+        // результат который нам отретернит reducer. На вход reducer даем этот же участок (ветку)
+        // state и action который dispatch получил в качестве аргумента
+        this.state.profilePage = reducerProfilePage( this.state.profilePage, action)
+        // на каждый участок state который изменяется есть свой reducer
+        this.state.messagesPage = reduserMessagesPage( this.state.messagesPage, action)
+        // в конце запускаем функцию которая перерендеривает страницу
+        this.callSubscriber( this.state)
     },
 
     // функция затычка
@@ -125,32 +101,8 @@ const store = {
 }
 
 
-export const addPostActionCreater = (message) => {
-    return {
-        type: ADD_POST,
-        message: message
-    }
-}
 
-export const postChangeActionCreator = (message) => {
-    return {
-        type: ADD_POST_TEXT,
-        message: message
-    }
-}
 
-export const changeMessageText = (text) => {
-    return {
-        type: CHANGE_MESSAGE_TEXT,
-        text: text
-    }
-}
 
-export const AddMessageActionCreator = (message) => {
-    return {
-        type: ADD_MESSAGE,
-        message: message
-    }
-}
 
 export default store

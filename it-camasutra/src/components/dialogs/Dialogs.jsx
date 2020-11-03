@@ -2,7 +2,7 @@ import React from 'react'
 import UserItem from './UserItem/UserItem'
 import MessageItem from './MessageItem/MessageItem'
 import './Dialogs.css'
-import { changeMessageText, AddMessageActionCreator } from '../../redux/state'
+import { changeMessageText, AddMessageActionCreator } from '../../redux/reducer-messagesPage'
 
 const Dialogs = (props) => {
 
@@ -29,6 +29,7 @@ const Dialogs = (props) => {
     
 
   }
+  
 
   return (
     <div className="content">
