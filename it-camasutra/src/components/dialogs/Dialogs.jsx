@@ -2,6 +2,7 @@ import React from 'react'
 import UserItem from './UserItem/UserItem'
 import MessageItem from './MessageItem/MessageItem'
 import './Dialogs.css'
+import { changeMessageText, AddMessageActionCreator } from '../../redux/state'
 
 const Dialogs = (props) => {
 
@@ -11,10 +12,16 @@ const Dialogs = (props) => {
   const messages = props.state.messagesData.map(item => <MessageItem message={item.message} />)
 
   let messageText = React.createRef()
+  
+  const changeMessageTextFromComponents = () => {
+    let action = changeMessageText(messageText.current.value)
+    props.dispatch(action)
+  }
 
   const sendMessage = () => {
-    
-    console.log(messageText.current.value);
+    const action = AddMessageActionCreator(messageText.current.value)
+    props.dispatch(action)
+
   }
 
   return (
@@ -32,7 +39,7 @@ const Dialogs = (props) => {
           </ul>
           <div className="newMesage">
 
-            <textarea ref={messageText} className="messageText" placeholder="Введите новое сообщение"></textarea>
+            <textarea ref={messageText} className="messageText" placeholder="Введите новое сообщение" onChange={changeMessageTextFromComponents} value={props.state.messageText}></textarea>
 
             <button className="sendMesage" onClick={sendMessage}>Отправить</button>
             

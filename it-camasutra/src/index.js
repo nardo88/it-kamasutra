@@ -5,10 +5,12 @@ import App from './App';
 import store  from './redux/state'
 import reportWebVitals from './reportWebVitals';
 
-export const renderDom = state => {
+export const renderDom = () => {
     ReactDOM.render(
       <React.StrictMode>
-        <App state={store.state} addPost={store.addPost.bind(store)} addPostText={store.addPostText.bind(store)} />
+
+        <App state={store.state} dispatch={store.dispatch.bind(store)} />
+
       </React.StrictMode>,
       document.getElementById('root')
     );
