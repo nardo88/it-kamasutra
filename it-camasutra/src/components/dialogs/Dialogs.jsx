@@ -19,8 +19,14 @@ const Dialogs = (props) => {
   }
 
   const sendMessage = () => {
-    const action = AddMessageActionCreator(messageText.current.value)
-    props.dispatch(action)
+    if (messageText.current.value){
+      const action = AddMessageActionCreator(messageText.current.value)
+      props.dispatch(action)
+      
+    } else {
+      alert('введите сообщение')
+    }
+    
 
   }
 

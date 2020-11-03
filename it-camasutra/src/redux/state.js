@@ -110,6 +110,7 @@ const store = {
                 message: action.message,
             }
             this.state.messagesPage.messagesData.push(messageItem)
+            this.state.messagesPage.messageText = ''
             this.callSubscriber(this.state)
         }
     },
