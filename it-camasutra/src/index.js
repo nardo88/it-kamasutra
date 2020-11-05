@@ -16,7 +16,7 @@ export const renderDom = () => {
     );
   }
 
-renderDom(store.getState())
+renderDom()
 
 store.subscribe(renderDom)
 // If you want to start measuring performance in your app, pass a function
