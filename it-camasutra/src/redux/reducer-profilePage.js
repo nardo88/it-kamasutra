@@ -1,8 +1,35 @@
 const ADD_POST = "ADD-POST"
 const ADD_POST_TEXT = "ADD-POST-TEXT"
 
-const reducerProfilePage = (state, action) => {
+let initialState = {
+    // посты
+    postsData: [{
+            id: 1,
+            message: 'Hi, how are you?',
+            likesCount: 12
+        },
+        {
+            id: 2,
+            message: 'it is my first post',
+            likesCount: 11
+        },
+        {
+            id: 3,
+            message: "I'm back",
+            likesCount: 8
+        },
+        {
+            id: 3,
+            message: "I'm back",
+            likesCount: 8
+        },
+    ],
+    // переменная для изменения текста в textarea
+    newPostText: ""
+}
 
+const reducerProfilePage = (state = initialState, action) => {
+    
     switch (action.type) {
         case ADD_POST:
             let post = {

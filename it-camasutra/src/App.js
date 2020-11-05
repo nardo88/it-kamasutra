@@ -15,7 +15,7 @@ import Music from './components/music/Music';
 
 
 function App(props) {
-
+console.log(props)
   
 
 
