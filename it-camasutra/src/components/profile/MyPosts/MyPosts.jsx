@@ -12,6 +12,7 @@ const MyPosts = (props) => {
     const addPost = () => {
         if (postText.current.value){
             props.addPost(postText.current.value)
+            props.onPostChange('')
         } else alert('введите текст')
         
     }
