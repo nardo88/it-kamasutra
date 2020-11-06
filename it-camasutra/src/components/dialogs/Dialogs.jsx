@@ -2,11 +2,8 @@ import React from 'react'
 import UserItem from './UserItem/UserItem'
 import MessageItem from './MessageItem/MessageItem'
 import './Dialogs.css'
-import { changeMessageText, AddMessageActionCreator } from '../../redux/reducer-messagesPage'
 
 const Dialogs = (props) => {
-
-  
 
   const dialogs = props.state.dialogData.map(item => <UserItem name={item.name} id={item.id} />)
   const messages = props.state.messagesData.map(item => <MessageItem message={item.message} />)
@@ -14,15 +11,12 @@ const Dialogs = (props) => {
   let messageText = React.createRef()
   
   const changeMessageTextFromComponents = () => {
-    let action = changeMessageText(messageText.current.value)
-    props.dispatch(action)
+    props.changeInputValue(messageText.current.value)
   }
 
   const sendMessage = () => {
     if (messageText.current.value){
-      const action = AddMessageActionCreator(messageText.current.value)
-      props.dispatch(action)
-      
+      props.sendMessage(messageText.current.value)
     } else {
       alert('введите сообщение')
     }

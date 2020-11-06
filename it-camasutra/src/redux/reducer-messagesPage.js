@@ -42,6 +42,7 @@ let initialState = {
             id: 4,
             message: 'By!'
         },
+      
     ],
     messageText: ''
 }
@@ -88,5 +89,4 @@ export const AddMessageActionCreator = (message) => {
         message: message
     }
 }
-
 export default reduserMessagesPage

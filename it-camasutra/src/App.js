@@ -11,13 +11,11 @@ import Header from './components/header/Header';
 import NavBar from './components/navbar/NavBar';
 import Profile from './components/profile/Profile';
 import Music from './components/music/Music';
+import DialogsContainer from './components/dialogs/DialogsContainer';
 
 
 
 function App(props) {
-console.log(props)
-  
-
 
   return (
     <BrowserRouter>
@@ -26,9 +24,9 @@ console.log(props)
         <NavBar />
         <div className="wrapper-content">
 
-          <Route path='/profile' render={() => <Profile state={props.state.profilePage} dispatch={props.dispatch} /> } />
+          <Route path='/profile' render={() => <Profile state={props.state.profilePage} dispatch={props.dispatch} store={props.store} /> } />
 
-          <Route path='/dialogs' render={() => <Dialogs state={props.state.messagesPage} dispatch={props.dispatch} />} />
+          <Route path='/dialogs' render={() => <DialogsContainer store={props.store} />} />
           <Route path='/news' render={() => <News />} />
           <Route path='/music' render={() => <Music />} />
           <Route path='/settings' render={() => <Settings />} />

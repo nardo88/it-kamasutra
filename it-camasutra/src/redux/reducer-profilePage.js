@@ -18,14 +18,10 @@ let initialState = {
             message: "I'm back",
             likesCount: 8
         },
-        {
-            id: 3,
-            message: "I'm back",
-            likesCount: 8
-        },
+              
     ],
     // переменная для изменения текста в textarea
-    newPostText: ""
+    newPostText: '',
 }
 
 const reducerProfilePage = (state = initialState, action) => {
@@ -38,15 +34,13 @@ const reducerProfilePage = (state = initialState, action) => {
                 likesCount: 0
             }
             state.postsData.push(post)
-            state.newPostText = ""
             return state   
         case ADD_POST_TEXT:
-            state.newPostText = action.text
+            state.newPostText = action.message
             return state  
         default:
             return state 
     }
-
 }
 
 

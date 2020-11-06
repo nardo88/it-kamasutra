@@ -9,7 +9,7 @@ export const renderDom = () => {
     ReactDOM.render(
       <React.StrictMode>
         
-        <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
+        <App state={store.getState()} dispatch={store.dispatch} store={store} />
 
       </React.StrictMode>,
       document.getElementById('root')
