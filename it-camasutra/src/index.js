@@ -6,7 +6,6 @@ import store  from './redux/redux-store'
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 
-export const renderDom = () => {
     ReactDOM.render(
       <React.StrictMode>
         <Provider store={store}>
@@ -16,11 +15,10 @@ export const renderDom = () => {
       </React.StrictMode>,
       document.getElementById('root')
     );
-  }
+  
 
-renderDom()
 
-store.subscribe(renderDom)
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

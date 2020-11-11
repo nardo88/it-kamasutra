@@ -5,8 +5,9 @@ import './Dialogs.css'
 
 const Dialogs = (props) => {
 
-  const dialogs = props.state.dialogData.map(item => <UserItem name={item.name} id={item.id} />)
-  const messages = props.state.messagesData.map(item => <MessageItem message={item.message} />)
+  const dialogs = props.state.dialogData.map(item => <UserItem name={item.name} key={item.id} id={item.id} />)
+  
+  const messages = props.state.messagesData.map(item => <MessageItem key={item.id} message={item.message} />)
 
   let messageText = React.createRef()
   

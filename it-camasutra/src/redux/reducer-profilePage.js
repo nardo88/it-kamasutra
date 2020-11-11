@@ -27,17 +27,22 @@ let initialState = {
 const reducerProfilePage = (state = initialState, action) => {
     
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST:{
             let post = {
                 id: 5,
                 message: action.message,
                 likesCount: 0
             }
-            state.postsData.push(post)
-            return state   
-        case ADD_POST_TEXT:
-            state.newPostText = action.message
-            return state  
+            let stateCopy = {...state}
+            stateCopy.postsData = [...state.postsData]
+            stateCopy.postsData.push(post)
+            return stateCopy  
+        } 
+        case ADD_POST_TEXT:{
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.message
+            return stateCopy  
+        }
         default:
             return state 
     }

@@ -48,31 +48,37 @@ let initialState = {
 }
 
 const reduserMessagesPage = (state = initialState, action) => {
-
-    // сверяем со значением action.type
     switch (action.type) {
-        // если значение = CHANGE_MESSAGE_TEXT
-        case CHANGE_MESSAGE_TEXT:
-            // выполняем этот участо кода который изменяет state
-            state.messageText = action.text
-            // и возвращаем измененный state
-            return state;
-        // если значение = ADD_MESSAGE 
-        case ADD_MESSAGE:
-            // то выполняем уже вот этот участок кода который изменяет state 
+        // так как мы тут создаем переменные, лучше блок case
+        // оборачивать в фигурные скобки
+        case CHANGE_MESSAGE_TEXT:{
+            // создаем копию state
+            let stateCopy = {...state}
+            // именно в копию помещаем новое значение
+            stateCopy.messageText = action.text
+            // и возвращаем копию state
+            return stateCopy;
+        }
+        // во втором случае action
+        case ADD_MESSAGE:{
+            // создаем объект с новым значением
             let messageItem = {
                 id:state.messagesData.length + 1,
                 message: action.message,
             }
-            state.messagesData.push(messageItem)
-            state.messageText = ''
-            // и возвращаем измененный state
-            return state;
-        // если ни одно из значений не подошло
+            // делаем копию state
+            let stateCopy = {...state}
+            // делаем глубокую копию state, т.е. копируем и сам массив
+            stateCopy.messagesData = [...state.messagesData]
+            // пушим новый объект уже в новый массив (в копию)
+            stateCopy.messagesData.push(messageItem)
+            // обнуляем поле input
+            stateCopy.messageText = ''
+            // и возвращаем копию state
+            return stateCopy;
+        }   
         default:
-            // просто возвращаем state
             return state;
-
     }
 }
 
