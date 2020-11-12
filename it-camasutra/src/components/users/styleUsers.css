@@ -1,7 +1,11 @@
+*{
+    box-sizing: border-box;
+}
+
 .userContainer {
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    padding: 20px;
     background-color: darkgray;
 }
 
@@ -50,7 +54,7 @@
 }
 
 .userInfo{
-    flex-basis: 70%;
+    flex-basis: 60%;
     display: flex;
     flex-direction: column;
     padding-left: 60px;
@@ -74,4 +78,10 @@
     font-size: 18px;
 
 
+}
+
+.UserBtn{
+    width: 200px;
+    height: 30px;
+    margin-bottom: 20px;
 }
