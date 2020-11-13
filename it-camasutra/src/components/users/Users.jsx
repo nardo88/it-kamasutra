@@ -5,15 +5,49 @@ import userImage from '../../images/user.jpg'
 
 class Users extends React.Component {
 
-    componentDidMount(){
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                // this.props.setTotalUserCount(response.data.totalCount)
+            })
+    }
+
+    onPageChanged(pageNumber){
+        this.props.setCurrentPage(pageNumber)
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        .then(response => {
             this.props.setUsers(response.data.items)
         })
     }
 
     render() {
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+
+        let pages = []
+
+        for (let i = 1; i <= pagesCount; i++){
+            pages.push(i)
+        }
+
         return (
             <div className="userContainer">
+
+                <div className="pagination">
+                    {
+                        pages.map(item => {
+                            return <button 
+                                        key={item}
+                                        className={this.props.carrentPage === item ? 'activePagination paginationItem' : 'paginationItem'}
+                                        onClick={() => {this.onPageChanged(item)}}>
+                                            {item}
+                                  </button>
+                        })
+                    }
+                </div>
+
                 {this.props.users.map(user => {
                     return <div key={user.id} className="userWrapper">
                         <div className="avatar">
@@ -36,5 +70,6 @@ class Users extends React.Component {
         )
     }
 }
+
 
 export default Users

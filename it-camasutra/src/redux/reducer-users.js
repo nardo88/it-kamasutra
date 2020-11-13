@@ -1,11 +1,14 @@
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTALUSER_COUNT = 'SET_TOTALUSER_COUNT'
 
 let initialState ={
-    users:  [
-        
-    ]
+    users:  [],
+    pageSize: 20,
+    totalUsersCount: 200,
+    carrentPage: 1
 }
 
 const reduserUsers = (state = initialState, action) => {
@@ -35,6 +38,17 @@ const reduserUsers = (state = initialState, action) => {
         case SET_USERS: {
             return {...state, users: [ ...action.users] }
         }
+
+        case SET_CURRENT_PAGE: {
+            // возвращает копию state у которого свойство carrentPage
+            // равно carrentPage который пришел из action
+            // а там номер элемента пагинации по которому кликнули
+            return {...state, carrentPage: action.carrentPage}
+        }
+        case SET_TOTALUSER_COUNT: {
+            return {...state, totalUsersCount: action.totalUsersCount}
+        }
+
         default:
             return state;
     }
@@ -59,6 +73,21 @@ export const setUsersAC = (users) => {
     return {
         type: SET_USERS,
         users
+    }
+}
+
+export const setCurrentPageAC = (carrentPage) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        carrentPage
+    }
+}
+
+export const setTotalUserCountAC = (totalUsersCount)=> {
+    return {
+        type: SET_TOTALUSER_COUNT,
+        totalUsersCount
+
     }
 }
 
