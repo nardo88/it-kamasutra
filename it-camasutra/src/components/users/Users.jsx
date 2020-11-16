@@ -1,75 +1,65 @@
 import React from 'react'
 import './styleUsers.css'
-import * as axios from 'axios'
 import userImage from '../../images/user.jpg'
 
-class Users extends React.Component {
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                // this.props.setTotalUserCount(response.data.totalCount)
-            })
+
+const Users = (props) => {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+
+    let pages = []
+
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
-    onPageChanged(pageNumber){
-        this.props.setCurrentPage(pageNumber)
+    return <div className="userContainer">
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-        .then(response => {
-            this.props.setUsers(response.data.items)
-        })
-    }
+        <div className="pagination">
+            {
+                pages.map(item => {
+                    return <button
+                        key={item}
+                        className={props.carrentPage === item ? 'activePagination paginationItem' : 'paginationItem'}
+                        onClick={() => { props.onPageChanged(item) }}>
+                        {item}
+                    </button>
+                })
+            }
+        </div>
 
-    render() {
-
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-
-        let pages = []
-
-        for (let i = 1; i <= pagesCount; i++){
-            pages.push(i)
-        }
-
-        return (
-            <div className="userContainer">
-
-                <div className="pagination">
+        {props.users.map(user => {
+            return <div key={user.id} className="userWrapper">
+                <div className="avatar">
+                    <img className="userAvatar" src={!user.photos.small ? userImage : user.photos.small} alt="" />
                     {
-                        pages.map(item => {
-                            return <button 
-                                        key={item}
-                                        className={this.props.carrentPage === item ? 'activePagination paginationItem' : 'paginationItem'}
-                                        onClick={() => {this.onPageChanged(item)}}>
-                                            {item}
-                                  </button>
-                        })
+                        user.folowed ? <button onClick={() => { props.unFollow(user.id) }} className="userBtn">folowed</button> : <button onClick={() => { props.follow(user.id) }} className="userBtn">unfolowed</button>
                     }
                 </div>
-
-                {this.props.users.map(user => {
-                    return <div key={user.id} className="userWrapper">
-                        <div className="avatar">
-                            <img className="userAvatar" src={!user.photos.small ? userImage : user.photos.small} alt="" />
-                            {
-                                user.folowed ? <button onClick={() => { this.props.unFollow(user.id) }} className="userBtn">folowed</button> : <button onClick={() => { this.props.follow(user.id) }} className="userBtn">unfolowed</button>
-                            }
-                        </div>
-                        <div className="userInfo">
-                            <div className="userName">{user.name}</div>
-                            <div className="userStatus">{user.status}</div>
-                        </div>
-                        <div className="userLocation">
-                            <div className="country">Страна: {!user.location ? 'не указана' : user.location}</div>
-                            <div className="city">Город: {!user.location ? 'не указан' : user.location}</div>
-                        </div>
-                    </div>
-                })}
+                <div className="userInfo">
+                    <div className="userName">{user.name}</div>
+                    <div className="userStatus">{user.status}</div>
+                </div>
+                <div className="userLocation">
+                    <div className="country">Страна: {!user.location ? 'не указана' : user.location}</div>
+                    <div className="city">Город: {!user.location ? 'не указан' : user.location}</div>
+                </div>
             </div>
-        )
-    }
-}
+        })}
 
+        <div className="pagination">
+            {
+                pages.map(item => {
+                    return <button
+                        key={item}
+                        className={props.carrentPage === item ? 'activePagination paginationItem' : 'paginationItem'}
+                        onClick={() => { props.onPageChanged(item) }}>
+                        {item}
+                    </button>
+                })
+            }
+        </div>
+    </div>
+}
 
 export default Users
