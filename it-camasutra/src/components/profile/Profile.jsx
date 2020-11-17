@@ -4,7 +4,6 @@ import ProfilePage from './ProfilePage/ProfilePage'
 
 
 const Profile = (props) => {
-    console.log(props);  
     return (
       <div className="content">
         

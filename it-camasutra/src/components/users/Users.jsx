@@ -33,10 +33,17 @@ const Users = (props) => {
         {props.users.map(user => {
             return <div key={user.id} className="userWrapper">
                 <div className="avatar">
-                    <NavLink to="/profile">
+
+                    {/* получив от сервера список пользователя мы прокинули этот массив через пропсы
+                    Далее мы мапим (Map) этот массив и у каждого пользователя аватарку оборачиваем в тег NavLink*/}
+                    <NavLink to={`/profile/${user.id}`}>
                         <img className="userAvatar" src={!user.photos.small ? userImage : user.photos.small} alt="" />
                     </NavLink>
+
+
                     {
+
+
                         user.folowed ? <button onClick={() => { props.unFollow(user.id) }} className="userBtn">folowed</button> : <button onClick={() => { props.follow(user.id) }} className="userBtn">unfolowed</button>
                     }
                 </div>
