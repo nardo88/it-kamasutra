@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './ProfilePage.module.css'
 import Preloader from '../../common/preloader'
+import defaultAvatar from './img/avatar.gif'
 
 
 const ProfilePage = (props) => {
@@ -12,7 +13,7 @@ const ProfilePage = (props) => {
             <img className={styles.headerImg} src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt=""/>
             <div className={styles.profileInfoWrapper}>
                 <div className={styles.profileImgAvatar}>
-                    <img className={styles.avatarImg} src={props.profile.photos.large} alt=""/>
+                    <img className={styles.avatarImg } src={!props.profile.photos.large ? defaultAvatar : props.profile.photos.large} alt=""/>
                 </div>
                 <div className={styles.profileInfo}>
                     <ul className={styles.listInfo}>
