@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST"
 const ADD_POST_TEXT = "ADD-POST-TEXT"
+const GET_PROFILE_PAGE = "GET_PROFILE_PAGE"
 
 let initialState = {
     // посты
@@ -22,6 +23,7 @@ let initialState = {
     ],
     // переменная для изменения текста в textarea
     newPostText: '',
+    profile: null
 }
 
 const reducerProfilePage = (state = initialState, action) => {
@@ -43,6 +45,9 @@ const reducerProfilePage = (state = initialState, action) => {
             stateCopy.newPostText = action.message
             return stateCopy  
         }
+        case GET_PROFILE_PAGE:{
+            return {...state, profile: action.profile}
+        }
         default:
             return state 
     }
@@ -52,14 +57,21 @@ const reducerProfilePage = (state = initialState, action) => {
 export const addPostActionCreater = (message) => {
     return {
         type: ADD_POST,
-        message: message
+        message
     }
 }
 
 export const postChangeActionCreator = (message) => {
     return {
         type: ADD_POST_TEXT,
-        message: message
+        message
+    }
+}
+
+export const getProfilePage = (profile) => {
+    return {
+        type: GET_PROFILE_PAGE,
+        profile
     }
 }
 

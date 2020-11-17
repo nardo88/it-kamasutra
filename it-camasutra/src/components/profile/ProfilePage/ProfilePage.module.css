@@ -1,0 +1,79 @@
+*{
+    box-sizing: border-box;
+}
+.headerImg{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.profileInfoWrapper{
+    padding: 10px;
+    height: 450px;
+    display: flex;
+    border: 1px solid #000;
+    border-radius: 10px;
+    margin: 10px;
+    background: rgb(228, 228, 228);
+
+
+}
+
+.profileImgAvatar{
+    border-radius: 10px;
+    background: #535353;
+    width: 40%;
+    padding: 30px 20px 50px;
+    border: 1px solid #000;
+    box-shadow: 0 0 10px 5px #535353;
+
+}
+.profileInfo{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px 30px 20px 40px;
+}
+.avatarImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid rgb(255, 255, 255);
+
+}
+
+.atributeName{
+    font-size: 14px;
+    color: #a3a3a3;
+    font-weight: 400;
+}
+
+.name{
+   color: #535353;
+   font-weight: bold;
+   font-size: 25px; 
+}
+
+.status{
+    font-size: 14px;
+    text-align: right;
+    color: #a3a3a3;
+    margin-top: 30px;
+}
+
+.job{
+    padding: 5px 10px;
+    background: #444444;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 20px;
+    width: 200px;
+    align-self: flex-end;
+}
+
+.listInfo{
+    display: flex;
+    flex-direction: column;
+}

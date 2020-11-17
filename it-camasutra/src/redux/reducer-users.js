@@ -62,35 +62,35 @@ const reduserUsers = (state = initialState, action) => {
 }
 
 
-export const foloowEC = (userId) => {
+export const follow = (userId) => {
     return {
         type: FOLLOW,
         userId
     }
 }
 
-export const unFoloowEC = (userId) => {
+export const unFollow = (userId) => {
     return {
         type: UNFOLLOW,
         userId
     }
 }
 
-export const setUsersAC = (users) => {
+export const setUsers = (users) => {
     return {
         type: SET_USERS,
         users
     }
 }
 
-export const setCurrentPageAC = (carrentPage) => {
+export const setCurrentPage = (carrentPage) => {
     return {
         type: SET_CURRENT_PAGE,
         carrentPage
     }
 }
 
-export const setTotalUserCountAC = (totalUsersCount)=> {
+export const setTotalUserCount = (totalUsersCount)=> {
     return {
         type: SET_TOTALUSER_COUNT,
         totalUsersCount
@@ -98,7 +98,7 @@ export const setTotalUserCountAC = (totalUsersCount)=> {
     }
 }
 
-export const changeIsFetchingAC = (isFetching)=> {
+export const changeIsFetching = (isFetching)=> {
     return {
         type: CHANGE_ISFETCHING,
         isFetching

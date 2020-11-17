@@ -1,14 +1,15 @@
 import React from 'react'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
-import styles from './Profile.module.css'
+import ProfilePage from './ProfilePage/ProfilePage'
 
 
 const Profile = (props) => {
+    console.log(props);  
     return (
       <div className="content">
-        <img className={styles.headerImg} src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt=""/>
-
-        <MyPostsContainer store={props.store} />
+        
+        <ProfilePage profile={props.profile} />
+        <MyPostsContainer />
       </div>
 
   )

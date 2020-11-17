@@ -8,10 +8,10 @@ import Settings from './components/settings/Settings';
 import News from './components/News/News';
 import Header from './components/header/Header';
 import NavBar from './components/navbar/NavBar';
-import Profile from './components/profile/Profile';
 import Music from './components/music/Music';
 import DialogsContainer from './components/dialogs/DialogsContainer';
 import UsersContainer from './components/users/UserContainer';
+import ProfileContainer from './components/profile/ProfileContainer';
 
 
 
@@ -24,7 +24,7 @@ function App(props) {
         <NavBar />
         <div className="wrapper-content">
 
-          <Route path='/profile' render={() => <Profile /> } />
+          <Route path='/profile' render={() => <ProfileContainer /> } />
 
           <Route path='/dialogs' render={() => <DialogsContainer />} />
           <Route path='/news' render={() => <News />} />
