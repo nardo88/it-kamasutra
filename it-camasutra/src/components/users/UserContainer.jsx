@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import Users from './Users'
 import { follow, unFollow, setUsers, setCurrentPage, setTotalUserCount, changeIsFetching } from '../../redux/reducer-users'
-import * as axios from 'axios'
 import React from 'react'
 import Preloader from '../common/preloader'
+import userApi from '../../api/api'
 
 
 
@@ -11,13 +11,15 @@ class UsersAPI extends React.Component {
 
     componentDidMount = () => {
         this.props.changeIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true,
-        })
-            .then(response => {
+        // обращаемся к импортированному объекту и вызываем его метод
+        // на вход передаем необходимы параметры, которые будут формировать 
+        // GET запрос  
+        userApi.getUsers(this.props.carrentPage, this.props.pageSize)
+        // метод then принимает данные, эти данные передаем в callback
+        .then(data => {
                 this.props.changeIsFetching(false)
-                this.props.setUsers(response.data.items)
-                // this.props.setTotalUserCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                // this.props.setTotalUserCount(data.totalCount)
             })
     }
     // callback для пагинации
@@ -27,12 +29,11 @@ class UsersAPI extends React.Component {
         // отображаем loader
         this.props.changeIsFetching(true)
         // делаем запрос на сервер
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-            withCredentials: true,
-        })
-            .then(response => {
+       
+        userApi.getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
                 this.props.changeIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
