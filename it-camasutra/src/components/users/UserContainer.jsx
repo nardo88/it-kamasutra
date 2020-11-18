@@ -11,19 +11,25 @@ class UsersAPI extends React.Component {
 
     componentDidMount = () => {
         this.props.changeIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true,
+        })
             .then(response => {
                 this.props.changeIsFetching(false)
                 this.props.setUsers(response.data.items)
                 // this.props.setTotalUserCount(response.data.totalCount)
             })
     }
-
+    // callback для пагинации
     onPageChanged = (pageNumber) => {
+        // записываем в state номер страницы 
         this.props.setCurrentPage(pageNumber)
+        // отображаем loader
         this.props.changeIsFetching(true)
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        // делаем запрос на сервер
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true,
+        })
             .then(response => {
                 this.props.changeIsFetching(false)
                 this.props.setUsers(response.data.items)

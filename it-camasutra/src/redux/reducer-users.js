@@ -20,7 +20,7 @@ const reduserUsers = (state = initialState, action) => {
                 ...state, 
                 users: state.users.map(user => {
                     if (user.id === action.userId){
-                        return {...user, folowed: true}
+                        return {...user, followed: true}
                     }
                     return user
                 })
@@ -31,7 +31,7 @@ const reduserUsers = (state = initialState, action) => {
                 ...state, 
                 users: state.users.map(user => {
                     if (user.id === action.userId){
-                        return {...user, folowed: false}
+                        return {...user, followed: false}
                     }
                     return user
                 })
