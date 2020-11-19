@@ -16,7 +16,9 @@ class HeaderContainer extends React.Component {
             // применяем диструктуризацию
             const {id, email, login} = response.data.data
             // вызываем callBack из контейнерной компоненты
-            this.props.setAuthData(id, email, login)
+            if (id) {
+                this.props.setAuthData(id, email, login)
+            } 
         })
     }
     // отрисовываем компоненту

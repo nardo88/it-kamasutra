@@ -4,13 +4,15 @@ const SET_USERS = 'SET-USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTALUSER_COUNT = 'SET_TOTALUSER_COUNT'
 const CHANGE_ISFETCHING = 'CHANGE_ISFETCHING'
+const CHANGE_FOLLOW_PROGRESS = 'CHANGE_FOLLOW_PROGRESS'
 
 let initialState ={
     users:  [],
     pageSize: 20,
     totalUsersCount: 200,
     carrentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInPropgress: []
 }
 
 const reduserUsers = (state = initialState, action) => {
@@ -54,6 +56,17 @@ const reduserUsers = (state = initialState, action) => {
             const newState = {...state}
             newState.isFetching = action.isFetching
             return newState
+        }
+        case CHANGE_FOLLOW_PROGRESS: {
+            return {
+                ...state,
+                // в массив followingInPropgress запишем: если action.inProgress вернет true
+                followingInPropgress: action.inProgress 
+                    // добавляем копию массива и еще в массив запишем id который пришел в action
+                    ? [...state.followingInPropgress, action.id] 
+                    // иначе оставляем в массиве все ID которые не равны тому что пришел в action
+                    : state.followingInPropgress.filter(id => id === !action.id)
+            }
         }
 
         default:
@@ -102,6 +115,15 @@ export const changeIsFetching = (isFetching)=> {
     return {
         type: CHANGE_ISFETCHING,
         isFetching
+    }
+}
+
+export const changeFollowProgress = (inProgress, id) => {
+    return {
+        type: CHANGE_FOLLOW_PROGRESS,
+        inProgress,
+        id
+
     }
 }
 

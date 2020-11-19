@@ -47,6 +47,11 @@
 
 }
 
+.userBtn:disabled{
+    background: rgb(209, 208, 208);
+    color: rgb(180, 179, 179);
+}
+
 .avatar{
     display: flex;
     flex-direction: column;
