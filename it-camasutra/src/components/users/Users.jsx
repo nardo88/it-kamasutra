@@ -8,7 +8,6 @@ import userApi from '../../api/api'
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-
     let pages = []
 
     for (let i = 1; i <= pagesCount; i++) {
@@ -17,18 +16,18 @@ const Users = (props) => {
 
     return <div className="userContainer">
 
-        <div className="pagination">
-            {
-                pages.map(item => {
-                    return <button
-                        key={item}
-                        className={props.carrentPage === item ? 'activePagination paginationItem' : 'paginationItem'}
-                        onClick={() => { props.onPageChanged(item) }}>
-                        {item}
-                    </button>
-                })
-            }
-        </div>
+                <div className="pagination">
+                    {
+                        pages.map(item => {
+                            return <button
+                                key={item}
+                                className={props.carrentPage === item ? 'activePagination paginationItem' : 'paginationItem'}
+                                onClick={() => { props.onPageChanged(item) }}>
+                                {item}
+                            </button>
+                        })
+                    }
+                </div>
 
         {props.users.map(user => {
             return <div key={user.id} className="userWrapper">
@@ -44,37 +43,37 @@ const Users = (props) => {
                     {
 
                         // клик по кнопка отписаться
-                        user.followed ? <button disabled={props.followingInPropgress.some(id => id === user.id)} onClick={() => { 
+                        user.followed ? <button disabled={props.followingInPropgress.some(id => id === user.id)} onClick={() => {
                             props.changeFollowProgress(true, user.id)
-                            
+
                             userApi.getUnFollowed(user.id)
-                            .then(data => {
-                                if(data.resultCode === 0){
-                                    props.unFollow(user.id) 
-                                }
-                                props.changeFollowProgress(false, user.id)
-                            })
+                                .then(data => {
+                                    if (data.resultCode === 0) {
+                                        props.unFollow(user.id)
+                                    }
+                                    props.changeFollowProgress(false, user.id)
+                                })
 
 
-                            
-                        }} className="userBtn">followed</button> 
-                        // клик по кнопке подписаться
-                        // в disabled запишется результат метода массива some который возвращает true если хотябы один элемент массива 
-                        // отвечает требованием тела callback функции в нашем случае это сверка идет с user.id
-                        : <button disabled={props.followingInPropgress.some(id => id === user.id)} onClick={() => { 
-                            props.changeFollowProgress(true, user.id)
-                            
-                            userApi.getFollowed(user.id)
-                            .then(data => {
-                                if(data.resultCode === 0){
-                                    props.follow(user.id) 
-                                }
-                                props.changeFollowProgress(false, user.id)
 
-                            })
+                        }} className="userBtn">followed</button>
+                            // клик по кнопке подписаться
+                            // в disabled запишется результат метода массива some который возвращает true если хотябы один элемент массива 
+                            // отвечает требованием тела callback функции в нашем случае это сверка идет с user.id
+                            : <button disabled={props.followingInPropgress.some(id => id === user.id)} onClick={() => {
+                                props.changeFollowProgress(true, user.id)
 
-                            
-                        }} className="userBtn">unfollowed</button>
+                                userApi.getFollowed(user.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
+                                            props.follow(user.id)
+                                        }
+                                        props.changeFollowProgress(false, user.id)
+
+                                    })
+
+
+                            }} className="userBtn">unfollowed</button>
                     }
                 </div>
                 <div className="userInfo">
