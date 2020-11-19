@@ -1,3 +1,5 @@
+import userApi from '../api/api'
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
@@ -6,8 +8,8 @@ const SET_TOTALUSER_COUNT = 'SET_TOTALUSER_COUNT'
 const CHANGE_ISFETCHING = 'CHANGE_ISFETCHING'
 const CHANGE_FOLLOW_PROGRESS = 'CHANGE_FOLLOW_PROGRESS'
 
-let initialState ={
-    users:  [],
+let initialState = {
+    users: [],
     pageSize: 20,
     totalUsersCount: 200,
     carrentPage: 1,
@@ -16,44 +18,61 @@ let initialState ={
 }
 
 const reduserUsers = (state = initialState, action) => {
-    switch (action.type){
+    switch (action.type) {
         case FOLLOW: {
             return {
-                ...state, 
+                ...state,
                 users: state.users.map(user => {
-                    if (user.id === action.userId){
-                        return {...user, followed: true}
+                    if (user.id === action.userId) {
+                        return {
+                            ...user,
+                            followed: true
+                        }
                     }
                     return user
                 })
             }
         }
-        case UNFOLLOW:{
+        case UNFOLLOW: {
             return {
-                ...state, 
+                ...state,
                 users: state.users.map(user => {
-                    if (user.id === action.userId){
-                        return {...user, followed: false}
+                    if (user.id === action.userId) {
+                        return {
+                            ...user,
+                            followed: false
+                        }
                     }
                     return user
                 })
             }
         }
         case SET_USERS: {
-            return {...state, users: [ ...action.users] }
+            return {
+                ...state,
+                users: [...action.users]
+            }
         }
 
         case SET_CURRENT_PAGE: {
             // возвращает копию state у которого свойство carrentPage
             // равно carrentPage который пришел из action
             // а там номер элемента пагинации по которому кликнули
-            return {...state, carrentPage: action.carrentPage}
+            return {
+                ...state,
+                carrentPage: action.carrentPage
+            }
         }
         case SET_TOTALUSER_COUNT: {
-            return {...state, totalUsersCount: action.totalUsersCount}
+            return {
+                ...state,
+                totalUsersCount: action.totalUsersCount
+            }
         }
         case CHANGE_ISFETCHING: {
-            const newState = {...state}
+            const newState = {
+                ...state
+            }
             newState.isFetching = action.isFetching
             return newState
         }
@@ -61,11 +80,13 @@ const reduserUsers = (state = initialState, action) => {
             return {
                 ...state,
                 // в массив followingInPropgress запишем: если action.inProgress вернет true
-                followingInPropgress: action.inProgress 
+                followingInPropgress: action.inProgress
                     // добавляем копию массива и еще в массив запишем id который пришел в action
-                    ? [...state.followingInPropgress, action.id] 
+                    ?
+                    [...state.followingInPropgress, action.id]
                     // иначе оставляем в массиве все ID которые не равны тому что пришел в action
-                    : state.followingInPropgress.filter(id => id === !action.id)
+                    :
+                    state.followingInPropgress.filter(id => id === !action.id)
             }
         }
 
@@ -103,7 +124,7 @@ export const setCurrentPage = (carrentPage) => {
     }
 }
 
-export const setTotalUserCount = (totalUsersCount)=> {
+export const setTotalUserCount = (totalUsersCount) => {
     return {
         type: SET_TOTALUSER_COUNT,
         totalUsersCount
@@ -111,7 +132,7 @@ export const setTotalUserCount = (totalUsersCount)=> {
     }
 }
 
-export const changeIsFetching = (isFetching)=> {
+export const changeIsFetching = (isFetching) => {
     return {
         type: CHANGE_ISFETCHING,
         isFetching
@@ -126,6 +147,58 @@ export const changeFollowProgress = (inProgress, id) => {
 
     }
 }
+
+// создание thunk-----------------------------------------------------
+//  thunk для получения USER
+export const getUsertThunkCreator = (carrentPage, pageSize) => {
+    return (dispatch) => {
+        // запускаем крутилку
+        dispatch(changeIsFetching(true))
+        // обращаемся к DAL и выполняем GET запрос
+        userApi.getUsers(carrentPage, pageSize)
+            .then(data => {
+                // после того как данные с сервера получены
+                // выключаем крутилку
+                dispatch(changeIsFetching(false))
+                // и закиываем данные в state? после того как state 
+                // обновится компонента отрисуется заново
+                dispatch(setUsers(data.items))
+            })
+    }
+}
+
+// thunk для удаления подписки
+export const changeFollowThunkCreator = (idUser) => {
+    return (dispatch) => {
+        // делаем кнопку не активной
+        dispatch(changeFollowProgress(true, idUser))
+
+        userApi.getUnFollowed(idUser)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unFollow(idUser))
+                }
+                dispatch(changeFollowProgress(false, idUser))
+            })
+    }
+}
+
+// thunk для подписки
+export const changeUnFollowThunkCreator = (idUser) => {
+    return (dispatch) => {
+        dispatch(changeFollowProgress(true, idUser))
+
+        userApi.getFollowed(idUser)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(follow(idUser))
+                }
+                dispatch(changeFollowProgress(false, idUser))
+            })
+    }
+}
+
+// конец создание thunk-----------------------------------------------------
 
 
 export default reduserUsers

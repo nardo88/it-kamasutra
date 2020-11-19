@@ -1,3 +1,5 @@
+import userApi from '../api/api'
+
 // константа для типа action
 const SET_AUTH_DATA = 'SET_AUTH_DATA'
 // state для инициализации
@@ -34,5 +36,34 @@ export const setAuthData = (id, email, login) => {
         }
     }
 }
+
+// создание thunk -------------------------------------------------------
+
+export const setAuthDataThunkCreator = () => {
+    return (dispatch) => {
+        userApi.setAuthData()
+        .then(response => {
+            // применяем диструктуризацию
+            const {id, email, login} = response.data.data
+            // вызываем callBack из контейнерной компоненты
+            if (id) {
+                dispatch(setAuthData(id, email, login))
+            } 
+        })
+    }
+}
+
+
+
+
+
+
+
+
+// создание thunk -------------------------------------------------------
+
+
+
+
 export default reducerAuth
 

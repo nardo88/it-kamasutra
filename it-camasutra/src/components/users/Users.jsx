@@ -38,43 +38,22 @@ const Users = (props) => {
                     <NavLink to={`/profile/${user.id}`}>
                         <img className="userAvatar" src={!user.photos.small ? userImage : user.photos.small} alt="" />
                     </NavLink>
-
-
                     {
-
+                        user.followed 
                         // клик по кнопка отписаться
-                        user.followed ? <button disabled={props.followingInPropgress.some(id => id === user.id)} onClick={() => {
-                            props.changeFollowProgress(true, user.id)
+                        ? <button disabled={props.followingInPropgress.some(id => id === user.id)} 
+                            onClick={() => { props.changeFollowThunkCreator(user.id) }}
+                            className="userBtn">followed</button>
 
-                            userApi.getUnFollowed(user.id)
-                                .then(data => {
-                                    if (data.resultCode === 0) {
-                                        props.unFollow(user.id)
-                                    }
-                                    props.changeFollowProgress(false, user.id)
-                                })
-
-
-
-                        }} className="userBtn">followed</button>
                             // клик по кнопке подписаться
                             // в disabled запишется результат метода массива some который возвращает true если хотябы один элемент массива 
                             // отвечает требованием тела callback функции в нашем случае это сверка идет с user.id
-                            : <button disabled={props.followingInPropgress.some(id => id === user.id)} onClick={() => {
-                                props.changeFollowProgress(true, user.id)
-
-                                userApi.getFollowed(user.id)
-                                    .then(data => {
-                                        if (data.resultCode === 0) {
-                                            props.follow(user.id)
-                                        }
-                                        props.changeFollowProgress(false, user.id)
-
-                                    })
-
-
-                            }} className="userBtn">unfollowed</button>
+                        : <button disabled={props.followingInPropgress.some(id => id === user.id)} 
+                            onClick={() => { props.changeUnFollowThunkCreator(user.id) }} 
+                            className="userBtn">unfollowed</button>
                     }
+
+
                 </div>
                 <div className="userInfo">
                     <div className="userName">{user.name}</div>

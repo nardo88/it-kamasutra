@@ -1,3 +1,6 @@
+import userApi from '../api/api'
+
+
 const ADD_POST = "ADD-POST"
 const ADD_POST_TEXT = "ADD-POST-TEXT"
 const GET_PROFILE_PAGE = "GET_PROFILE_PAGE"
@@ -74,5 +77,31 @@ export const getProfilePage = (profile) => {
         profile
     }
 }
+
+// создание thunk-----------------------------------------------------------
+
+export const getProfileThunkCreator = (idUser) => {
+    return (dispatch) => {
+        userApi.getProfile(idUser)
+        .then(response => {
+            dispatch(getProfilePage(response.data))
+        })
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// конец создание thunk-----------------------------------------------------------
 
 export default reducerProfilePage

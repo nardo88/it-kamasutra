@@ -12,6 +12,7 @@ const instance = axios.create({
 // создаем объект
 const userApi = {
     // у которого есть метод получения пользователей
+    // получение пользвателей в зависимостри от номера траницы и размера страницы
     getUsers(carrentPage, pageSize) {
         // метод вернет промис - результат выполнения GET запроса нашего axios
         return instance.get(`users?page=${carrentPage}&count=${pageSize}`)
@@ -19,14 +20,24 @@ const userApi = {
             // который так же вернет промис но уже не со всеми данными первого промиса
             .then(response => response.data)
     },
+    // добавление подписки
     getFollowed(id) {
         return instance.post(`/follow/${id}`)
             .then(response => response.data)
     },
+    // удаление подписики
     getUnFollowed(id) {
         return instance.delete(`/follow/${id}`)
             .then(response => response.data)
 
+    },
+    // загрузка профайла по ID
+    getProfile(idUser){
+       return instance.get(`/profile/${idUser}`)
+    },
+
+    setAuthData(){
+        return instance.get(`/auth/me`)
     }
 }
 export default userApi
