@@ -149,6 +149,7 @@ export const changeFollowProgress = (inProgress, id) => {
 }
 
 // создание thunk-----------------------------------------------------
+
 //  thunk для получения USER
 export const getUsertThunkCreator = (carrentPage, pageSize) => {
     return (dispatch) => {

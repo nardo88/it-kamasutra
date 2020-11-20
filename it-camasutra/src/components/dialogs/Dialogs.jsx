@@ -3,6 +3,7 @@ import UserItem from './UserItem/UserItem'
 import MessageItem from './MessageItem/MessageItem'
 import './Dialogs.css'
 
+
 const Dialogs = (props) => {
 
   const dialogs = props.state.dialogData.map(item => <UserItem name={item.name} key={item.id} id={item.id} />)
@@ -21,9 +22,8 @@ const Dialogs = (props) => {
     } else {
       alert('введите сообщение')
     }
-    
-
   }
+
   
 
   return (

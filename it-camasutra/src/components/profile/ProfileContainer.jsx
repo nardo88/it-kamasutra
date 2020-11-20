@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Profile from './Profile'
 import { getProfilePage, getProfileThunkCreator } from '../../redux/reducer-profilePage'
 import { withRouter } from 'react-router-dom'
+import { withAuthRedirect } from '../hoc/withAuthRedirect'
 
 class ProfileContainerClass extends React.Component {
    
@@ -17,19 +18,22 @@ class ProfileContainerClass extends React.Component {
     }
 
     render(){
+
         return <Profile {...this.props} />
     }
 }
+// вызываем hoc который в зависимости от того авторизован ли пользователь
+// возвращает либо компоненту с профайлом либо redirect на login
+const AuthRedirectComponent = withAuthRedirect(ProfileContainerClass)
 
 const mapStateToProps = (state) => {
-    
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
     }
 }
-
-const ProfileWithRouter = withRouter(ProfileContainerClass)
-
+// применяем hoc который добавляет пропсы нашей компоненте
+const ProfileWithRouter = withRouter(AuthRedirectComponent)
+// создаем контейнерную компоненту conect получает компоненту после hoc withRouter
 const ProfileContainer = connect(mapStateToProps, { getProfilePage, getProfileThunkCreator })( ProfileWithRouter )
 
 export default ProfileContainer
