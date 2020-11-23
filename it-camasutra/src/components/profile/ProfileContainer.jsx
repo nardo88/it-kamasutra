@@ -13,7 +13,7 @@ class ProfileContainerClass extends React.Component {
         
         let idUser = this.props.match.params.userId
         if(!idUser){
-            idUser = 2
+            idUser = 12698
         }
         this.props.getProfileThunkCreator(idUser)
        
