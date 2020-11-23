@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { changeMessageText, AddMessageActionCreator } from '../../redux/reducer-messagesPage'
 import Dialogs from './Dialogs'
 import { withAuthRedirect } from '../hoc/withAuthRedirect'
+import { compose } from 'redux'
 
 
 
@@ -23,11 +24,22 @@ const maoDispatchToProps = dispatch =>{
 }
 
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
+// нам нужно отрисовать компоненту dialogs
+// сначала мы ее оборачивали в ХОК withAuthRedirect
+// let AuthRedirectComponent = withAuthRedirect(Dialogs)
+// затем оборачивали результат в connect что бы прокинуть callback и state
+// const DialogsContainer = connect(mapStateToProps, maoDispatchToProps)(AuthRedirectComponent)
 
-const DialogsContainer = connect(mapStateToProps, maoDispatchToProps)(AuthRedirectComponent)
-
-export default DialogsContainer
+// теперь просто по деффолту возвращаем компоненту
+// которую с помощью compose протаскиваем через ХОКИ
+// читаем снизу вверх
+export default compose(
+  // и только затем через connect
+  connect(mapStateToProps, maoDispatchToProps),
+  // сначала протаскиваем через хок withAuthRedirect
+  withAuthRedirect
+  // компоненту dialogs
+)(Dialogs)
 
 
 

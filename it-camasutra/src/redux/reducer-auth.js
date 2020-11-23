@@ -25,6 +25,8 @@ const reducerAuth = (state = initialState, action) => {
     }
     
 }
+
+
 // action creator получаем данные от сервера ID email и login
 export const setAuthData = (id, email, login) => {
     return {

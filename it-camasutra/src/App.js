@@ -14,7 +14,7 @@ import Login from './components/login/Login';
 
 
 function App(props) {
-
+  
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -23,7 +23,6 @@ function App(props) {
         <div className="wrapper-content">
 
           <Route path='/profile/:userId?' render={() => <ProfileContainer /> } />
-
           <Route path='/dialogs' render={() => <DialogsContainer />} />
           <Route path='/news' render={() => <News />} />
           <Route path='/music' render={() => <Music />} />

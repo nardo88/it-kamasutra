@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 // объявляем функцию которая принимает компонент
 export const withAuthRedirect = (Component) => {
+    
     // создаем класс который будет отрисовывать компоненту которая пришла в hoc
     // но при этом будет происходить проверка.
     class RedirectComponent extends React.Component {
