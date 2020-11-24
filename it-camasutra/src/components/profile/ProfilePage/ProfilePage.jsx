@@ -5,11 +5,15 @@ import defaultAvatar from './img/avatar.gif'
 import ProfileStatus from './ProfileStatus'
 
 
+
 const ProfilePage = (props) => {
+    
     if(!props.profile){
         return <Preloader />
     } 
+
     return(
+        
         <div className="profilePageWrapper">
             <img className={styles.headerImg} src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt=""/>
             <div className={styles.profileInfoWrapper}>
@@ -19,7 +23,7 @@ const ProfilePage = (props) => {
                 <div className={styles.profileInfo}>
                     <ul className={styles.listInfo}>
                         <li className={styles.name}> <span className={styles.atributeName}>Имя: </span> {props.profile.fullName}</li>
-                        <li className={styles.status}> <ProfileStatus status="Default status" /></li>
+                        <li className={styles.status}> <ProfileStatus status={props.status} changeStatus={props.changeStatus} /></li>
                         <li className={styles.job} title={props.profile.lookingForAJobDescription}> {props.profile.lookingForAJob ? `look for a job` : `I don't need a JOB`} </li>
                     </ul>
                 </div>

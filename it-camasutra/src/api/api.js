@@ -36,8 +36,21 @@ const userApi = {
        return instance.get(`/profile/${idUser}`)
     },
 
+    // аутентификация пользователя
     setAuthData(){
         return instance.get(`/auth/me`)
+    },
+
+    // получение статуса пользователя
+    getStatus(idUser){
+        return instance.get(`/profile/status/${idUser}`)
+    },
+    // обновление статуса
+    updateStatus(status){
+        // put запрос именно в этой ситуации нам возвращает только 
+        // результат операции т.е. либо ок либо не ок, сам статус 
+        // он нам не пересылает
+        return instance.put(`/profile/status`, {status: status})
     }
 }
 export default userApi

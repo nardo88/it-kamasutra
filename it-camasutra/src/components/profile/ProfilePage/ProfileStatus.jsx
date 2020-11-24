@@ -1,9 +1,9 @@
 import React from 'react'
 
 class ProfileStatus extends React.Component {
-
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     activateEditMode(){
@@ -16,6 +16,14 @@ class ProfileStatus extends React.Component {
         this.setState({
             editMode: false
         })
+        this.props.changeStatus(this.state.status)
+    }
+
+    statusOnChange = (e) =>{
+        this.setState({
+            status: e.currentTarget.value
+        })
+        
     }
 
     render(){
@@ -25,9 +33,9 @@ class ProfileStatus extends React.Component {
                     // если editMode содержит true
                     this.state.editMode 
                     // то отрисовываем input
-                    ? <input onBlur={this.deActivateEditMode.bind(this)} autoFocus value={this.props.status} type="text"/> 
+                    ? <input onChange={this.statusOnChange} onBlur={this.deActivateEditMode.bind(this)} autoFocus value={this.state.status} type="text"/> 
                     // иначе отрисовываем span
-                    : <span onDoubleClick={this.activateEditMode.bind(this)  } className="statusText">{this.props.status}</span>
+                    : <span onDoubleClick={this.activateEditMode.bind(this)  } className="statusText">{ !this.props.status ? 'статуса нет' : this.props.status}</span>
                 }
                 
 

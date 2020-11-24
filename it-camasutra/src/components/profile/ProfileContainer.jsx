@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
-import { getProfilePage, getProfileThunkCreator } from '../../redux/reducer-profilePage'
+import { getProfilePage, getProfileThunkCreator, getProfileStatusThunk, updateProfileStatusThunk } from '../../redux/reducer-profilePage'
 import { withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../hoc/withAuthRedirect'
 
@@ -16,11 +16,10 @@ class ProfileContainerClass extends React.Component {
             idUser = 12698
         }
         this.props.getProfileThunkCreator(idUser)
-       
+        this.props.getProfileStatusThunk(idUser)
     }
 
     render(){
-
         return <Profile {...this.props} />
     }
 }
@@ -31,6 +30,7 @@ class ProfileContainerClass extends React.Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
+        status: state.profilePage.status
     }
 }
 // применяем hoc который добавляет пропсы нашей компоненте
@@ -39,9 +39,9 @@ const mapStateToProps = (state) => {
 // const ProfileContainer = connect(mapStateToProps, { getProfilePage, getProfileThunkCreator })( ProfileWithRouter )
 
  const ProfileContainer = compose(
-    connect(mapStateToProps, { getProfilePage, getProfileThunkCreator }),
+    connect(mapStateToProps, { getProfilePage, getProfileThunkCreator, getProfileStatusThunk, updateProfileStatusThunk }),
     withRouter,
-    withAuthRedirect
+    // withAuthRedirect
 )(ProfileContainerClass)
 
 export default ProfileContainer
