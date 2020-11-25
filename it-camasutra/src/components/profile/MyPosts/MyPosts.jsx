@@ -1,36 +1,43 @@
 import React from 'react'
+import { Field, reduxForm } from 'redux-form'
 import styles from './MyPosts.module.css'
 import Post from './Post/Post'
 
 const MyPosts = (props) => {
-    
+    // мапим посты которые пришли из пропсов
     const posts = props.state.postsData.map(item => <Post message={item.message} key={item.id} like={item.likesCount} />)
 
-    const postText = React.createRef()
-
-    // Функция которая будет вызвана по нажатии кнопки
-    const addPost = () => {
-        if (postText.current.value){
-            props.addPost(postText.current.value)
-            props.onPostChange('')
+    // Функция которая будет вызвана по нажатии кнопки формы
+    const addPost = (data) => {
+        if (data.postText) {
+            props.addPost(data.postText)
         } else alert('введите текст')
-        
     }
 
-    const onPostChange = () => {
-        props.onPostChange(postText.current.value)
-    }
-
-
-    return(
+    // отрисовка JSX
+    return (
         <div className={styles.wrapper}>
-            <textarea ref={postText} className={styles.postText} placeholder="Введите новое сообщение" value={props.state.newPostText} onChange={onPostChange}></textarea>
-            <button onClick={addPost} className={styles.addPostText}>Добавить</button>
+            <AddPostTextReduxForm onSubmit={addPost} />
             <ul className={styles.list}>
                 {posts.reverse()}
             </ul>
         </div>
     )
 }
+
+// создание компоненты которая отрисовывает форму
+const AddPostTextForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit} >
+            <Field name="postText" className={styles.postText} placeholder="Введите новое сообщение" component="textarea" />
+            <button className={styles.addPostText}>Добавить</button>
+        </form>
+    )
+}
+
+// контейнерная компонента которую создалис  помощью redux-form
+const AddPostTextReduxForm = reduxForm({
+    form: 'addPostForm'
+})(AddPostTextForm)
 
 export default MyPosts
