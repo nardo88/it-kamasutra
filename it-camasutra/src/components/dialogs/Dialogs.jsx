@@ -12,12 +12,7 @@ const Dialogs = (props) => {
   const messages = props.state.messagesData.map(item => <MessageItem key={item.id} message={item.message} />)
 
   let addNewMessage = (data) => {
-
-    if (data.messageText) {
       props.sendMessage(data.messageText)
-    } else {
-      alert('введите сообщение')
-    }
   }
 
 

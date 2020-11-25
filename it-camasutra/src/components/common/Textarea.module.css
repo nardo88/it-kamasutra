@@ -1,0 +1,21 @@
+.textArea{
+    width: 300px;
+    height: 70px;
+    margin-top: 10px;
+    resize: none;
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px;
+    outline: none;
+}
+
+.textArea:focus{
+    box-shadow: 0 0 5px 5px rgb(79, 199, 255);
+    border: transparent;
+}
+
+.error{
+    border: transparent;
+    box-shadow: 0 0 5px 5px rgb(255, 0, 0);
+
+}

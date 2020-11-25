@@ -2,6 +2,9 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import styles from './MyPosts.module.css'
 import Post from './Post/Post'
+import {requiredField, maxLength} from '../../../utils/validators'
+import { Textarea } from '../../common/Textarea'
+
 
 const MyPosts = (props) => {
     // мапим посты которые пришли из пропсов
@@ -9,9 +12,7 @@ const MyPosts = (props) => {
 
     // Функция которая будет вызвана по нажатии кнопки формы
     const addPost = (data) => {
-        if (data.postText) {
             props.addPost(data.postText)
-        } else alert('введите текст')
     }
 
     // отрисовка JSX
@@ -29,7 +30,7 @@ const MyPosts = (props) => {
 const AddPostTextForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} >
-            <Field name="postText" className={styles.postText} placeholder="Введите новое сообщение" component="textarea" />
+            <Field name="postText" className={styles.postText} placeholder="Введите новое сообщение" component={Textarea} validate={[requiredField, maxLength]} />
             <button className={styles.addPostText}>Добавить</button>
         </form>
     )
