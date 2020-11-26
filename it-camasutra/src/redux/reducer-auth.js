@@ -8,7 +8,7 @@ const initialState = {
     email: null,
     login: null,
     isAuth: false
-}
+} 
 // тело reducer
 const reducerAuth = (state = initialState, action) => {
     switch (action.type){
@@ -41,14 +41,18 @@ export const setAuthData = (id, email, login, isAuth) => {
 
 // создание thunk -------------------------------------------------------
 
+// thunk creator/ замыкаем dispatch
 export const setAuthDataThunkCreator = () => {
     return (dispatch) => {
+        // делаем GET запрос на сервер
         userApi.setAuthData()
         .then(response => {
+            // в ответ на запрос сервер высылает id, email и login
             // применяем диструктуризацию
             const {id, email, login} = response.data.data
-            // вызываем callBack из контейнерной компоненты
+            // если с сервера пришел ID
             if (id) {
+                // dispatch-им actioncreator setAuthData
                 dispatch(setAuthData(id, email, login, true))
             } 
         })
@@ -58,11 +62,13 @@ export const setAuthDataThunkCreator = () => {
 // создаем thunk для того что бы залогинится
 // передаем данные формы в качестве аргументов
 export const login = (email, password, rememberMe) => (dispatch) => {
-    // создаем запрос на сервер
+    // создаем запрос на сервер (запросу передаем данные с формы)
     userApi.login(email, password, rememberMe)
-        // 
+        // если ответ с сервера без ошибок
         .then(response => {
             if (response.data.resultCode === 0) {
+                // диспатчим thunk который запрашивает с сервера
+                // данные авторизованного пользователя
                 dispatch(setAuthDataThunkCreator())
             }
         })

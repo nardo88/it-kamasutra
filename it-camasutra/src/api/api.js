@@ -8,7 +8,7 @@ const instance = axios.create({
     },
     // адрес сервера по умолчанию
     baseURL: 'https://social-network.samuraijs.com/api/1.0/'
-})
+}) 
 // создаем объект
 const userApi = {
     // у которого есть метод получения пользователей
@@ -37,6 +37,7 @@ const userApi = {
     },
 
     // аутентификация пользователя
+    // вернее проверка авторизован ли пользователь
     setAuthData(){
         return instance.get(`/auth/me`)
     },

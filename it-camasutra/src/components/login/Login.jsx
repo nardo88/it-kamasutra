@@ -5,7 +5,7 @@ import {requiredField, maxLength} from '../../utils/validators'
 import { connect } from 'react-redux'
 import {login} from '../../redux/reducer-auth'
 import { Redirect } from 'react-router-dom'
-
+ 
 
 const LoginForm = (props) => {
     return (
@@ -35,14 +35,19 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
     // callback для Хока
+
+    
     const onSubmit = (formData) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
+
     // отрисовка JSX
+
+    // есть в state значение isAuth
+    // true тогда проводим редирект на страницу с профилем
     if (props.isAuth){
         return <Redirect to={'/profile'}/>
     }
-
     return (
 
         <div className="wrapper">
