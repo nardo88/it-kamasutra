@@ -60,6 +60,7 @@ const userApi = {
         // с помощью axios создается POST запрос
         return instance.post(`auth/login`, {email, password, rememberMe})
     },
+    
     // метод для того что бы выйти
     logout(){
         // сервер настроен такми образом что мы просто посылаем delete зпрос
