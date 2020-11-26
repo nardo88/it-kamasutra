@@ -17,7 +17,6 @@ const reducerAuth = (state = initialState, action) => {
             return{
                 ...state,
                 ...action.data,
-                isAuth: true
             }
         }
         default:
@@ -28,13 +27,14 @@ const reducerAuth = (state = initialState, action) => {
 
 
 // action creator получаем данные от сервера ID email и login
-export const setAuthData = (id, email, login) => {
+export const setAuthData = (id, email, login, isAuth) => {
     return {
         type: SET_AUTH_DATA,
         data: {
             id,
             email,
-            login
+            login,
+            isAuth
         }
     }
 }
@@ -49,15 +49,34 @@ export const setAuthDataThunkCreator = () => {
             const {id, email, login} = response.data.data
             // вызываем callBack из контейнерной компоненты
             if (id) {
-                dispatch(setAuthData(id, email, login))
+                dispatch(setAuthData(id, email, login, true))
             } 
         })
     }
 }
 
+// создаем thunk для того что бы залогинится
+// передаем данные формы в качестве аргументов
+export const login = (email, password, rememberMe) => (dispatch) => {
+    // создаем запрос на сервер
+    userApi.login(email, password, rememberMe)
+        // 
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthDataThunkCreator())
+            }
+        })
+}
 
-
-
+// thunk для вылогинизации
+export const logOut = () => (dispatch) => {
+    userApi.logout()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthData(null, null, null, false))
+            }
+        })
+}
 
 
 

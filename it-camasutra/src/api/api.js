@@ -51,6 +51,18 @@ const userApi = {
         // результат операции т.е. либо ок либо не ок, сам статус 
         // он нам не пересылает
         return instance.put(`/profile/status`, {status: status})
+    },
+
+    
+    // метод принимает данные с формы
+    login(email, password, rememberMe = false){
+        // с помощью axios создается POST запрос
+        return instance.post(`auth/login`, {email, password, rememberMe})
+    },
+    // метод для того что бы выйти
+    logout(){
+        // сервер настроен такми образом что мы просто посылаем delete зпрос
+        return instance.delete(`auth/login`)
     }
 }
 export default userApi

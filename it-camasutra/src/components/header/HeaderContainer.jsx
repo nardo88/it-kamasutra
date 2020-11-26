@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Header from './Header'
-import { setAuthDataThunkCreator} from '../../redux/reducer-auth'
+import { setAuthDataThunkCreator, logOut} from '../../redux/reducer-auth'
 
 // классовая компонента
 class HeaderContainer extends React.Component {
@@ -24,4 +24,4 @@ const mapStateToProps = (state) => {
     }
 }
 // создаем контейнерную компоненту
-export default connect(mapStateToProps, {  setAuthDataThunkCreator })(HeaderContainer)
+export default connect(mapStateToProps, {  setAuthDataThunkCreator, logOut })(HeaderContainer)

@@ -2,16 +2,19 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Input } from '../common/Textarea'
 import {requiredField, maxLength} from '../../utils/validators'
+import { connect } from 'react-redux'
+import {login} from '../../redux/reducer-auth'
+import { Redirect } from 'react-router-dom'
 
 
 const LoginForm = (props) => {
     return (
             <form onSubmit={props.handleSubmit}>
                 <div className="form__item">
-                    <Field component={Input} name={'login'} placeholder="Login" validate={[requiredField, maxLength]}/>
+                    <Field component={Input} name={'email'} placeholder="Email" validate={[requiredField, maxLength]}/>
                 </div>
                 <div className="form__item">
-                    <Field component={Input} name={'password'} placeholder="Password" validate={[requiredField, maxLength]}/>
+                    <Field component={Input} name={'password'} placeholder="Password" type="password" validate={[requiredField, maxLength]}/>
                 </div>
                 <div className="form__item">
                     <Field component={'input'} name={'rememberMe'} type="checkbox" />
@@ -30,13 +33,18 @@ const LoginReduxForm = reduxForm({
     form: 'login'
 })(LoginForm)
 
-const Login = () => {
+const Login = (props) => {
     // callback для Хока
     const onSubmit = (formData) => {
-        console.log(formData);
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
     // отрисовка JSX
+    if (props.isAuth){
+        return <Redirect to={'/profile'}/>
+    }
+
     return (
+
         <div className="wrapper">
             <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmit} />
@@ -44,4 +52,10 @@ const Login = () => {
     )
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+export default connect(mapStateToProps, { login })(Login)
