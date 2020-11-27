@@ -1,20 +1,29 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Input } from '../common/Textarea'
-import {requiredField, maxLength} from '../../utils/validators'
+import {requiredField, maxLengthCreator} from '../../utils/validators'
 import { connect } from 'react-redux'
 import {login} from '../../redux/reducer-auth'
 import { Redirect } from 'react-router-dom'
 import style from '../../components/common/Textarea.module.css'
 
 const LoginForm = (props) => {
+    
+        let maxLength30 = maxLengthCreator(10)
+    
+    
+
     return (
             <form onSubmit={props.handleSubmit}>
                 <div className="form__item">
-                    <Field component={Input} name={'email'} placeholder="Email" validate={[requiredField, maxLength]}/>
+                    
+                    <Field component={Input} name={'email'} placeholder="Email" validate={[requiredField, maxLength30]}/>
+                    
                 </div>
                 <div className="form__item">
-                    <Field component={Input} name={'password'} placeholder="Password" type="password" validate={[requiredField, maxLength]}/>
+
+                    <Field component={Input} name={'password'} placeholder="Password" type="password" validate={requiredField}/>
+
                 </div>
                 <div className="form__item">
                     <Field component={'input'} name={'rememberMe'} type="checkbox" />

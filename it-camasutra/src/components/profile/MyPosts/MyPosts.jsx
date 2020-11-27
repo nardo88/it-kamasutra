@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import styles from './MyPosts.module.css'
 import Post from './Post/Post'
-import {requiredField, maxLength} from '../../../utils/validators'
+import {requiredField, } from '../../../utils/validators'
 import { Textarea } from '../../common/Textarea'
 
 
@@ -30,7 +30,7 @@ const MyPosts = (props) => {
 const AddPostTextForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} >
-            <Field name="postText" className={styles.postText} placeholder="Введите новое сообщение" component={Textarea} validate={[requiredField, maxLength]} />
+            <Field name="postText" className={styles.postText} placeholder="Введите новое сообщение" component={Textarea} validate={[requiredField]} />
             <button className={styles.addPostText}>Добавить</button>
         </form>
     )
