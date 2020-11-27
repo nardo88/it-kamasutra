@@ -1,5 +1,7 @@
 import userApi from '../api/api'
+
 import {stopSubmit} from 'redux-form'
+
 // константа для типа action
 const SET_AUTH_DATA = 'SET_AUTH_DATA'
 // state для инициализации
@@ -71,13 +73,13 @@ export const login = (email, password, rememberMe) => (dispatch) => {
                 // данные авторизованного пользователя
                 dispatch(setAuthDataThunkCreator())
             } else{
-                // let action = stopSubmit('login', {_error: 'something wrong'})
-                // dispatch(action)
+                
+                
 
                 // Получение текста ошибки с сервера
                 let message = response.data.messages.length ? response.data.messages[0] : 'some error'
                 // короткая запись
-                dispatch(stopSubmit('login', {_error: message}))
+                dispatch(stopSubmit('login', { _error: message}))
             }
         })
 }
