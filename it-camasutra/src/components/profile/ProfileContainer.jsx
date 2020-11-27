@@ -13,7 +13,7 @@ class ProfileContainerClass extends React.Component {
         
         let idUser = this.props.match.params.userId
         if(!idUser){
-            idUser = 12698
+            idUser = this.props.id
         }
         this.props.getProfileThunkCreator(idUser)
         this.props.getProfileStatusThunk(idUser)
@@ -30,7 +30,9 @@ class ProfileContainerClass extends React.Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        id: state.auth.id
+
     }
 }
 // применяем hoc который добавляет пропсы нашей компоненте

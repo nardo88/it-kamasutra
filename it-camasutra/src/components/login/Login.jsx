@@ -5,7 +5,7 @@ import {requiredField, maxLength} from '../../utils/validators'
 import { connect } from 'react-redux'
 import {login} from '../../redux/reducer-auth'
 import { Redirect } from 'react-router-dom'
- 
+import style from '../../components/common/Textarea.module.css'
 
 const LoginForm = (props) => {
     return (
@@ -20,6 +20,10 @@ const LoginForm = (props) => {
                     <Field component={'input'} name={'rememberMe'} type="checkbox" />
                     Remember me
                 </div>
+                {
+                    props.error && <div className={style.somthingWrong}>{props.error}</div> 
+                }
+                
                 <div className="form__item">
                     <button>OK</button>
                 </div>
