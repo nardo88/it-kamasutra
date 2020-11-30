@@ -47,7 +47,7 @@ export const setAuthData = (id, email, login, isAuth) => {
 export const setAuthDataThunkCreator = () => {
     return (dispatch) => {
         // делаем GET запрос на сервер
-        userApi.setAuthData()
+        return userApi.setAuthData()
         .then(response => {
             // в ответ на запрос сервер высылает id, email и login
             // применяем диструктуризацию
@@ -58,6 +58,7 @@ export const setAuthDataThunkCreator = () => {
                 dispatch(setAuthData(id, email, login, true))
             } 
         })
+        
     }
 }
 

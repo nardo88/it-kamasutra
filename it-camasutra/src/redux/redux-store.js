@@ -3,6 +3,8 @@ import reduserMessagesPage from './reducer-messagesPage'
 import reducerProfilePage from './reducer-profilePage'
 import reduserUsers from './reducer-users'
 import reducerAuth from './reducer-auth'
+import appReducer from './app-reducer'
+
 
 import {reducer as formReducer} from 'redux-form'
 
@@ -13,7 +15,8 @@ let reducers = combineReducers({
     profilePage: reducerProfilePage,
     usersPage: reduserUsers,
     auth: reducerAuth,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 })
 
 
