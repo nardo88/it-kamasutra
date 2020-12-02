@@ -18,7 +18,7 @@ class ProfileStatus extends React.Component {
         })
         this.props.changeStatus(this.state.status)
     }
-
+    // функция при каждом вводе буквы в input (flux)
     statusOnChange = (e) =>{
         this.setState({
             status: e.currentTarget.value

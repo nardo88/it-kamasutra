@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './ProfilePage.module.css'
 import Preloader from '../../common/preloader'
 import defaultAvatar from './img/avatar.gif'
-import ProfileStatus from './ProfileStatus'
+import ProfileStatusWithHooks from './ProfileStatusWithHooks'
 
 
 
@@ -23,7 +23,7 @@ const ProfilePage = (props) => {
                 <div className={styles.profileInfo}>
                     <ul className={styles.listInfo}>
                         <li className={styles.name}> <span className={styles.atributeName}>Имя: </span> {props.profile.fullName}</li>
-                        <li className={styles.status}> <ProfileStatus status={props.status} changeStatus={props.changeStatus} /></li>
+                        <li className={styles.status}> <ProfileStatusWithHooks status={props.status} changeStatus={props.changeStatus} /></li>
                         <li className={styles.job} title={props.profile.lookingForAJobDescription}> {props.profile.lookingForAJob ? `look for a job` : `I don't need a JOB`} </li>
                     </ul>
                 </div>
