@@ -6,7 +6,9 @@ import {requiredField, } from '../../../utils/validators'
 import { Textarea } from '../../common/Textarea'
 
 
-const MyPosts = (props) => {
+const MyPosts = React.memo(props => {
+
+    console.log('render');
     // мапим посты которые пришли из пропсов
     const posts = props.state.postsData.map(item => <Post message={item.message} key={item.id} like={item.likesCount} />)
 
@@ -24,7 +26,7 @@ const MyPosts = (props) => {
             </ul>
         </div>
     )
-}
+});
 
 // создание компоненты которая отрисовывает форму
 const AddPostTextForm = (props) => {
@@ -36,7 +38,7 @@ const AddPostTextForm = (props) => {
     )
 }
 
-// контейнерная компонента которую создалис  помощью redux-form
+// контейнерная компонента которую создали с помощью redux-form
 const AddPostTextReduxForm = reduxForm({
     form: 'addPostForm'
 })(AddPostTextForm)

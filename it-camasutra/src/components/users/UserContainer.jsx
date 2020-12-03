@@ -9,11 +9,13 @@ import { getUsersSelector, getPageSize, getTotalUsersCount, getCarrentPage, getI
 
 
 
-class UsersAPI extends React.Component {
+class UsersAPI extends React.PureComponent {
 
     componentDidMount = () => {
         this.props.getUsertThunkCreator(this.props.carrentPage, this.props.pageSize)
     }
+
+   
 
 
     // callback для пагинации
