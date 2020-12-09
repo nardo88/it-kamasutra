@@ -7,7 +7,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTALUSER_COUNT = 'SET_TOTALUSER_COUNT'
 const CHANGE_ISFETCHING = 'CHANGE_ISFETCHING'
 const CHANGE_FOLLOW_PROGRESS = 'CHANGE_FOLLOW_PROGRESS'
-
+ 
 let initialState = {
     users: [],
     pageSize: 20,
@@ -18,6 +18,7 @@ let initialState = {
 }
 
 const reduserUsers = (state = initialState, action) => {
+
     switch (action.type) {
         case FOLLOW: {
             return {
@@ -50,7 +51,8 @@ const reduserUsers = (state = initialState, action) => {
         case SET_USERS: {
             return {
                 ...state,
-                users: [...action.users]
+                users: [...action.users],
+                totalUsersCount: action.totalUsersCount
             }
         }
 
@@ -110,10 +112,11 @@ export const unFollow = (userId) => {
     }
 }
 
-export const setUsers = (users) => {
+export const setUsers = (users, totalUsersCount) => {
     return {
         type: SET_USERS,
-        users
+        users,
+        totalUsersCount
     }
 }
 
@@ -163,7 +166,7 @@ export const getUsertThunkCreator = (carrentPage, pageSize) => {
                 dispatch(changeIsFetching(false))
                 // и закиываем данные в state? после того как state 
                 // обновится компонента отрисуется заново
-                dispatch(setUsers(data.items))
+                dispatch(setUsers(data.items, data.totalCount))
             })
     }
 }
