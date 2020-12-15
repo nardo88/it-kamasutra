@@ -26,9 +26,12 @@ const ProfilePage = (props) => {
             <div className={styles.profileInfoWrapper}>
                 <div className={styles.profileImgAvatar}>
                     <img className={styles.avatarImg } src={!props.profile.photos.large ? defaultAvatar : props.profile.photos.large} alt=""/>
+
                     {
+                    // здесь если в пропсах мы получаем id авторизованного пользователя то отображаем input
                      !props.isOwner ? <input type="file" onChange={onMainPhotoSelected} /> : ''
                     }
+                    
                 </div>
                 <div className={styles.profileInfo}>
                     <ul className={styles.listInfo}>

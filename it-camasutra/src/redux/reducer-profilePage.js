@@ -60,8 +60,10 @@ const reducerProfilePage = (state = initialState, action) => {
         case UPDATE_STATUS: {
             return {...state, status: action.status}
         }
-        // reducer для 
+
+        // case для фото
         case SAVE_PHOTO_SUCCESS: {
+            // возвращаем state d котором меняем только раздел фото
             return {...state, profile: {...state.profile, photos: action.photos}}
         }
         default:
@@ -104,6 +106,7 @@ export const updateProfileStatus = (status) => {
         status
     }
 }
+
 // action для загрузки фотографии
 export const savePhotoSuccess = (photos) => {
     return {
@@ -112,6 +115,8 @@ export const savePhotoSuccess = (photos) => {
         
     }
 }
+
+
 // создание thunk-----------------------------------------------------------
 
 export const getProfileThunkCreator = (idUser) => {
