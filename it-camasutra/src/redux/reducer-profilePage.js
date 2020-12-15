@@ -6,6 +6,7 @@ const ADD_POST_TEXT = "ADD-POST-TEXT"
 const GET_PROFILE_PAGE = "GET_PROFILE_PAGE"
 const GET_STATUS = "GET_STATUS"
 const UPDATE_STATUS = "GET_STATUS"
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
 
 let initialState = {
     // посты
@@ -59,6 +60,10 @@ const reducerProfilePage = (state = initialState, action) => {
         case UPDATE_STATUS: {
             return {...state, status: action.status}
         }
+        // reducer для 
+        case SAVE_PHOTO_SUCCESS: {
+            return {...state, profile: {...state.profile, photos: action.photos}}
+        }
         default:
             return state 
     }
@@ -85,18 +90,26 @@ export const getProfilePage = (profile) => {
         profile
     }
 }
-
+// получение статуса
 export const getProfileStatus = (status) => {
     return {
         type: GET_STATUS,
         status
     }
 }
-
+// обновление статуса
 export const updateProfileStatus = (status) => {
     return {
         type: UPDATE_STATUS,
         status
+    }
+}
+// action для загрузки фотографии
+export const savePhotoSuccess = (photos) => {
+    return {
+        type: SAVE_PHOTO_SUCCESS,
+        photos
+        
     }
 }
 // создание thunk-----------------------------------------------------------
@@ -107,6 +120,18 @@ export const getProfileThunkCreator = (idUser) => {
         .then(response => {
             dispatch(getProfilePage(response.data))
         })
+    }
+}
+
+// thunk для загрузки изображения =====================================================
+export const savePhoto = (file) => async (dispatch) => {
+    // делаем запрос на сервер в ответ получаем promise 
+    let response = await userApi.savePhoto(file);
+    // если серв ответил без ошибок
+    if (response.data.resultCode === 0){
+        // диспатчим action creator. на вход даем то
+        // что вернул сервер, а именно раздел photos
+        dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
 

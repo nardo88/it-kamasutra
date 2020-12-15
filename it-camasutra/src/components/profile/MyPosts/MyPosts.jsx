@@ -8,7 +8,6 @@ import { Textarea } from '../../common/Textarea'
 
 const MyPosts = React.memo(props => {
 
-    console.log('render');
     // мапим посты которые пришли из пропсов
     const posts = props.state.postsData.map(item => <Post message={item.message} key={item.id} like={item.likesCount} />)
 

@@ -65,6 +65,23 @@ const userApi = {
     logout(){
         // сервер настроен такми образом что мы просто посылаем delete зпрос
         return instance.delete(`auth/login`)
+    },
+
+    // отправка на сервер изображения аватарки
+    // файл приходит в качестве аргумента
+    savePhoto(photoFile){
+        // если надоотправить на сервер файл то необходимо создать объект 
+        // класса FormData и уже потом с помощью метода append
+        // добавить в него наш файл
+        const formData = new FormData();
+        formData.append("image", photoFile )
+        // для отправки изображения метод put должен принять три аргумента
+        // 1 - путь, 2 - FormData, 3 - заголовок 'Content-Type': 'multipart/form-data'
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 }
 export default userApi

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import './App.css'
 import Settings from './components/settings/Settings';
 import News from './components/News/News';
@@ -32,7 +32,7 @@ class App extends React.Component {
     }
 
     return (
-      <BrowserRouter>
+      <HashRouter >
         <div className="app-wrapper">
           <HeaderContainer />
           <NavBar />
@@ -46,7 +46,7 @@ class App extends React.Component {
             <Route path='/login' render={() => <Login /> } />
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }

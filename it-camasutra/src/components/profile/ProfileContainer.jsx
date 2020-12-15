@@ -1,16 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
-import { getProfilePage, getProfileThunkCreator, getProfileStatusThunk, updateProfileStatusThunk } from '../../redux/reducer-profilePage'
+import { getProfilePage, getProfileThunkCreator, getProfileStatusThunk, updateProfileStatusThunk, savePhoto } from '../../redux/reducer-profilePage'
 import { withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../hoc/withAuthRedirect'
 
 import { compose } from 'redux'
 
 class ProfileContainerClass extends React.Component {
-   
-    componentDidMount(){
-        
+    
+    refreshProfile(){
         let idUser = this.props.match.params.userId
         if(!idUser){
             idUser = this.props.id
@@ -18,9 +17,21 @@ class ProfileContainerClass extends React.Component {
         this.props.getProfileThunkCreator(idUser)
         this.props.getProfileStatusThunk(idUser)
     }
+    componentDidMount(){
+        this.refreshProfile()
+        
+    }
+
+    componentDidUpdate(prevProps){
+        if (this.props.match.params.userId !== prevProps.match.params.userId){
+            this.refreshProfile()
+
+        }
+
+    }
 
     render(){
-        return <Profile {...this.props} />
+        return <Profile {...this.props} isOwner={!!this.props.match.params.userId} savePhoto={this.props.savePhoto}  />
     }
 }
 // вызываем hoc который в зависимости от того авторизован ли пользователь
@@ -41,7 +52,7 @@ const mapStateToProps = (state) => {
 // const ProfileContainer = connect(mapStateToProps, { getProfilePage, getProfileThunkCreator })( ProfileWithRouter )
 
  const ProfileContainer = compose(
-    connect(mapStateToProps, { getProfilePage, getProfileThunkCreator, getProfileStatusThunk, updateProfileStatusThunk }),
+    connect(mapStateToProps, { getProfilePage, getProfileThunkCreator, getProfileStatusThunk, updateProfileStatusThunk, savePhoto }),
     withRouter,
     withAuthRedirect
 )(ProfileContainerClass)

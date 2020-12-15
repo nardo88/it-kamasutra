@@ -11,6 +11,13 @@ const ProfilePage = (props) => {
     if(!props.profile){
         return <Preloader />
     } 
+    // функция на onChange input type file
+    const onMainPhotoSelected = (e) => {
+        if (e.target.files.length){
+            // в колбек передаем наш файл
+            props.savePhoto(e.target.files[0]);
+        }
+    }
 
     return(
         
@@ -19,6 +26,9 @@ const ProfilePage = (props) => {
             <div className={styles.profileInfoWrapper}>
                 <div className={styles.profileImgAvatar}>
                     <img className={styles.avatarImg } src={!props.profile.photos.large ? defaultAvatar : props.profile.photos.large} alt=""/>
+                    {
+                     !props.isOwner ? <input type="file" onChange={onMainPhotoSelected} /> : ''
+                    }
                 </div>
                 <div className={styles.profileInfo}>
                     <ul className={styles.listInfo}>
