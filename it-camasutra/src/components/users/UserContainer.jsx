@@ -15,9 +15,6 @@ class UsersAPI extends React.PureComponent {
         this.props.getUsertThunkCreator(this.props.carrentPage, this.props.pageSize)
     }
 
-   
-
-
     // callback для пагинации
     onPageChanged = (pageNumber) => {
         // записываем в state номер страницы 
@@ -37,7 +34,6 @@ class UsersAPI extends React.PureComponent {
                     carrentPage={this.props.carrentPage}
                     users={this.props.users}
                     follow={this.props.follow}
-                    // unFollow={this.props.unFollow}
                     changeFollowProgress={this.props.changeFollowProgress}
                     followingInPropgress={this.props.followingInPropgress}
                     changeFollowThunkCreator={this.props.changeFollowThunkCreator}
