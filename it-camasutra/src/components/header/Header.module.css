@@ -5,6 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
 }
 
 .img{
@@ -22,4 +23,73 @@
   font-weight: bold;
   text-decoration: none;
   color: rgb(85, 85, 85);
+}
+
+.avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+
+.authWrapper{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+.user_name{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.logOut{
+  position: absolute;
+  width: 100%;
+  bottom: -10px;
+  transform: translateY(100%);
+  background: #fff;
+  overflow: hidden;
+  transition: .3s;
+  visibility: hidden;
+  opacity: 0;
+  background: #bbbbbb;
+  border: 1px solid #000;
+  height: 40px;
+}
+
+.show{
+  visibility: visible;
+  opacity: 1;
+}
+
+.logOutBtn{
+  width: 100%;  
+  height: 100%;
+  cursor: pointer;
+  border: 1px solid #000;
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  transition: .3s;
+  background: #bbbbbb;
+
+
+}
+
+.logOutBtn:hover{
+  color: #fff;
+  background: #000;
+
+}
+
+.logoFirst{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.logo{
+  font-size: 20px;
+  font-family: Pacifico, sans-serif;
+  text-shadow: 1px 1px 2px black, 0 0 1em #333; 
 }

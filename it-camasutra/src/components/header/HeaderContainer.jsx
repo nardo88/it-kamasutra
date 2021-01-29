@@ -15,8 +15,10 @@ class HeaderContainer extends React.Component {
 // пропсы для классовой компоненты
 const mapStateToProps = (state) => {
     return {
+        profile: state.profilePage.profile,
         auth: state.auth
     }
 }
+
 // создаем контейнерную компоненту
 export default connect(mapStateToProps, { logOut })(HeaderContainer)
