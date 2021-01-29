@@ -1,14 +1,15 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import '../Dialogs.css'
+import style from '../Dialogs.module.css';
+
 
 
 const UserItem = (props) => {
 
     let path = '/dialogs/' + props.id
     return (
-        <li className="users__item">
-            <NavLink className='item' activeClassName='active-user' to={path}>{props.name}</NavLink>
+        <li className={style.users__item}>
+            <NavLink className={style.item} activeClassName={style.active_user} to={path}>{props.name}</NavLink>
         </li>
     )
 }

@@ -39,7 +39,7 @@ const Users = (props) => {
                 {/* Блок с пагинацией вверху страницы */}
                 <div className="pagination">
                 {/* если номер порции больше 1 то кнопку скрываем, эта кнопка по клику увеличивает номер текущей порции с помощью хука */}
-                {portionNumber > 1 ? <button onClick={() => {setPortionNumber(portionNumber - 1)}} >Назад</button> : ''}
+                {portionNumber > 1 ? <button className="prev__btn" onClick={() => {setPortionNumber(portionNumber - 1)}} >Назад</button> : ''}
                     {
                         // Перед отрисовкой элементов пагинации мы фильтруем значения, должен быть больше значения номера страницы левой границы
                         // и меньше значения номера страницы правой границы, эти значения мапим
@@ -54,7 +54,7 @@ const Users = (props) => {
                     }
                 {/* отрисовка кнопки вперед. если номер текущей порции станет больше общего количества порци то кнопка скрывается 
                 сама кнопка с помощью хука увеличивает номер текущей порции*/}
-                { portionNumber < portionCount ? <button onClick={ () => {setPortionNumber(portionNumber + 1)}} >Вперед</button> : ''}
+                { portionNumber < portionCount ? <button className="next__btn" onClick={ () => {setPortionNumber(portionNumber + 1)}} >Вперед</button> : ''}
                 </div>
 
 
@@ -96,7 +96,7 @@ const Users = (props) => {
         })}
 
             <div className="pagination">
-                {portionNumber > 1 ? <button onClick={() => {setPortionNumber(portionNumber - 1)}} >Назад</button> : ''}
+                {portionNumber > 1 ? <button className="prev__btn" onClick={() => {setPortionNumber(portionNumber - 1)}} >Назад</button> : ''}
                     {
                         pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(item => {
                             return <button
@@ -107,7 +107,7 @@ const Users = (props) => {
                                     </button>
                         })
                     }
-                { portionCount > portionNumber ? <button onClick={ () => {setPortionNumber(portionNumber + 1)}} >Вперед</button> : ''}
+                { portionCount > portionNumber ? <button className="next__btn" onClick={ () => {setPortionNumber(portionNumber + 1)}} >Вперед</button> : ''}
             </div>
     </div>
 }

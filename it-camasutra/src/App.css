@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 body{
-  background: rgb(201, 201, 201);
+  background: rgb(134, 134, 134);
 }
 .app-wrapper{
   display: grid;
@@ -19,14 +19,15 @@ body{
 
 .nav{
   grid-area: nav;
-  background-color: cadetblue;
+  background: #bbbbbb;
 
 }
 
 
 
 .wrapper-content{
-  background: #fff;
+  background: #bbbbbb;
   grid-area: content;
+  min-height: calc(100vh - 80px);
 }
 

@@ -7,7 +7,6 @@ import ProfileStatusWithHooks from './ProfileStatusWithHooks'
 
 
 const ProfilePage = (props) => {
-    console.log(props);
     if(!props.profile){
         return <Preloader />
     } 
@@ -22,7 +21,6 @@ const ProfilePage = (props) => {
     return(
         
         <div className="profilePageWrapper">
-            <img className={styles.headerImg} src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt=""/>
             <div className={styles.profileInfoWrapper}>
                 <div className={styles.profileImgAvatar}>
                     <img className={styles.avatarImg } src={!props.profile.photos.large ? defaultAvatar : props.profile.photos.large} alt=""/>

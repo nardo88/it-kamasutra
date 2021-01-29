@@ -4,17 +4,34 @@
     font-weight: bold;
     font-size: 18px;
     cursor: pointer;
+    transition: .3s;
+    background: rgb(138, 138, 138);
+    padding: 5px 10px;
+    display: inline-block;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.link:hover{
+    color: #535353;
+    background: #fff;
 }
 
 
 
 .active{
-    color: rgb(180, 176, 176);
-
+    color: #535353;
+    background: #fff;
 }
 
 ul{
     list-style-type: none;
-    padding: 0 0 0 20px;
+    padding: 10px;
     
+}
+
+.nav__item{
+    margin-bottom: 10px;
+    
+
 }

@@ -3,32 +3,25 @@ import { Field, reduxForm } from 'redux-form'
 import { Input } from '../common/Textarea'
 import {requiredField, maxLength} from '../../utils/validators'
 import { connect } from 'react-redux'
-import {login} from '../../redux/reducer-auth'
+import { login } from '../../redux/reducer-auth'
 import { Redirect } from 'react-router-dom'
 import style from '../../components/common/Textarea.module.css'
 
 const LoginForm = (props) => {
-        
-    
-    
-
     return (
-            <form onSubmit={props.handleSubmit}>
+            <form className={style.formLogin} onSubmit={props.handleSubmit}>
                 <div className="form__item">
                     <Field component={Input} name={'email'} placeholder="Email" validate={[requiredField, maxLength ]}/>
                 </div>
                 <div className="form__item">
                     <Field component={Input} name={'password'} placeholder="Password" type="password" validate={requiredField}/>
                 </div>
-                <div className="form__item">
-                    <Field component={'input'} name={'rememberMe'} type="checkbox" />
-                    Remember me
-                </div>
+                
                 {
                     props.error && <div className={style.somthingWrong}>{props.error}</div> 
                 }
                 <div className="form__item">
-                    <button>OK</button>
+                    <button className={style.btn_login}>OK</button>
                 </div>
             </form>
     )
@@ -42,14 +35,10 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
     // callback для Хока
-
-    
     const onSubmit = (formData) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
-
     // отрисовка JSX
-
     // есть в state значение isAuth
     // true тогда проводим редирект на страницу с профилем
     if (props.isAuth){
@@ -57,9 +46,9 @@ const Login = (props) => {
     }
     return (
 
-        <div className="wrapper">
-            <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit} />
+        <div className={style.wrapper}>
+            <h1 className={style.title}>Авторизация</h1>
+            <LoginReduxForm  onSubmit={onSubmit} />
         </div>
     )
 }

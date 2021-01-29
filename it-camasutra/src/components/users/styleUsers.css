@@ -116,3 +116,29 @@
     color: #fff;
 }
 
+.prev__btn, .next__btn{
+    transition: .3s;
+    padding: 6px 10px;
+    cursor: pointer;
+    border: 1px solid #fff;
+    background: #fff;
+    border-radius: 4px;
+    color: slategrey;
+    outline: none;
+    
+}
+
+.prev__btn{
+    margin-right: 20px;
+
+}
+.next__btn{
+    margin-left: 20px;
+
+}
+
+.prev__btn:hover, .next__btn:hover{
+    background: slategrey;
+    color: #fff;
+}
+
