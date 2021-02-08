@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
-import { NavLink } from 'react-router-dom'
-import styles from './Header.module.css'
+import React, {useState} from 'react';
+import { NavLink } from 'react-router-dom';
+import styles from './Header.module.css';
+import userImage from '../../images/user.jpg';
 
 const Header = (props) => {
     const [logOutItem, setLogOutItem] = useState(false);
@@ -18,7 +19,7 @@ const Header = (props) => {
                     props.auth.isAuth ? 
                         <div className={styles.authWrapper} onClick={showLogOut}>
                             <span className={styles.user_name} >{props.auth.login}</span>
-                            { props.profile ? <img className={styles.avatar} src={props.profile.photos.small} alt=""/> : ''}
+                            { props.profile ? <img className={styles.avatar} src={props.profile.photos.small ? props.profile.photos.small : userImage} alt=""/> : ''}
                             <div className={`${styles.logOut} ${logOutItem ? styles.show : ''}` }>
                                 <button className={styles.logOutBtn} onClick={props.logOut} >Выйти</button>
                             </div>
