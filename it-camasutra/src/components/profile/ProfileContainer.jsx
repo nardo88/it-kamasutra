@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
-import { getProfilePage, getProfileThunkCreator, getProfileStatusThunk, updateProfileStatusThunk, savePhoto } from '../../redux/reducer-profilePage'
+import { getProfilePage, getProfileThunkCreator, getProfileStatusThunk, updateProfileStatusThunk, savePhoto, changeFullName, changeLookingJob, changeAboutMe, changeSkills, changeProfileData } from '../../redux/reducer-profilePage'
 import { withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../hoc/withAuthRedirect'
 
@@ -31,7 +31,7 @@ class ProfileContainerClass extends React.Component {
     }
 
     render(){
-        return <Profile {...this.props} isOwner={!!this.props.match.params.userId} savePhoto={this.props.savePhoto}  />
+        return <Profile {...this.props} isOwner={!!this.props.match.params.userId} savePhoto={this.props.savePhoto} changeFullName={this.props.changeFullName} changeLookingJob={this.props.changeLookingJob} changeAboutMe={this.props.changeAboutMe} changeSkills={this.props.changeSkills} changeProfileData={this.props.changeProfileData}  />
     }
 }
 // вызываем hoc который в зависимости от того авторизован ли пользователь
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
 // const ProfileContainer = connect(mapStateToProps, { getProfilePage, getProfileThunkCreator })( ProfileWithRouter )
 
  const ProfileContainer = compose(
-    connect(mapStateToProps, { getProfilePage, getProfileThunkCreator, getProfileStatusThunk, updateProfileStatusThunk, savePhoto }),
+    connect(mapStateToProps, { getProfilePage, getProfileThunkCreator, getProfileStatusThunk, updateProfileStatusThunk, savePhoto, changeFullName, changeLookingJob, changeAboutMe, changeSkills, changeProfileData }),
     withRouter,
     withAuthRedirect
 )(ProfileContainerClass)

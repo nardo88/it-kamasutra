@@ -9,7 +9,6 @@
 
 .profileInfoWrapper{
     padding: 10px;
-    height: 450px;
     display: flex;
     border: 1px solid #000;
     border-radius: 10px;
@@ -26,6 +25,7 @@
     padding: 30px 20px 50px;
     border: 1px solid #000;
     box-shadow: 0 0 10px 5px #535353;
+    max-height: 400px;
 
 }
 .profileInfo{

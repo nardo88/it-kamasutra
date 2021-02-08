@@ -7,6 +7,10 @@ const GET_PROFILE_PAGE = "GET_PROFILE_PAGE"
 const GET_STATUS = "GET_STATUS"
 const UPDATE_STATUS = "GET_STATUS"
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
+const CHANGE_FULL_NAME = "CHANGE_FULL_NAME"
+const CHANGE_LOOK_JOB = "CHANGE_LOOK_JOB"
+const CHANGE_ABOUT_ME = "CHANGE_ABOUT_ME"
+const CHANGE_SKILLS = "CHANGE_SKILLS"
 
 let initialState = {
     // посты
@@ -66,6 +70,26 @@ const reducerProfilePage = (state = initialState, action) => {
             // возвращаем state d котором меняем только раздел фото
             return {...state, profile: {...state.profile, photos: action.photos}}
         }
+
+        case CHANGE_FULL_NAME: {
+            return {...state, profile: {...state.profile, fullName: action.fullName}}
+
+        }
+        case CHANGE_LOOK_JOB: {
+
+            return {...state, profile: {...state.profile, lookingForAJob: action.value}}
+
+        }
+        case CHANGE_ABOUT_ME: {
+
+            return {...state, profile: {...state.profile, aboutMe: action.value}}
+
+        }
+        case CHANGE_SKILLS: {
+
+            return {...state, profile: {...state.profile, lookingForAJobDescription: action.value}}
+
+        }
         default:
             return state 
     }
@@ -116,6 +140,33 @@ export const savePhotoSuccess = (photos) => {
     }
 }
 
+// action для редактирования fullName
+export const changeFullName = (fullName) => {
+    return {
+        type: CHANGE_FULL_NAME,
+        fullName
+    }
+}
+
+export const changeLookingJob = (value) => {
+    return {
+        type: CHANGE_LOOK_JOB,
+        value
+    }
+}
+
+export const changeAboutMe = value => {
+    return {
+        type: CHANGE_ABOUT_ME,
+        value
+    }
+}
+export const changeSkills = value => {
+    return {
+        type: CHANGE_SKILLS,
+        value
+    }
+}
 
 // создание thunk-----------------------------------------------------------
 
@@ -141,7 +192,6 @@ export const savePhoto = (file) => async (dispatch) => {
 }
 
 // получение статуса пользователя
-
 export const getProfileStatusThunk = (idUser) => {
     return (dispatch) => {
         userApi.getStatus(idUser)
@@ -163,6 +213,17 @@ export const updateProfileStatusThunk = (status) => {
                 dispatch(updateProfileStatus(status))
             }
         })
+    }
+}
+
+
+// редактирование данных пользователя
+export const changeProfileData = (profile) => async (dispatch, getState) => {
+    // делаем запрос на сервер в ответ получаем promise 
+    let response = await userApi.saveProfile(profile);
+    // если серв ответил без ошибок
+    if (response.data.resultCode === 0){
+        dispatch(getProfileThunkCreator(getState().auth.id));
     }
 }
 
